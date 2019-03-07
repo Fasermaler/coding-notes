@@ -253,6 +253,23 @@ After you uploaded the file, you might notice some output in the console (or if 
 
 You might notice that this is basically a JSON. You might also notice that the URL does not point to the media itself but points to the JSON. This is the metadata for the file.
 
+##### Uploading File without urllib
+
+Updates to the request library has made it possible to upload a file without using URLlib. A sample code is as follows:
+
+```python
+def upload_file():
+    file_url = "https://firebasestorage.googleapis.com/v0/b/<PROJECT ID>appspot.com/o/<FOLDER>%2F<FILE>"
+    data = <FILE>
+    files = {'file':'1.data'}
+    with open('1.pkl', 'wb') as outfile:
+        outfile.write(data)
+        files = {'1.pkl', open('1.pkl', 'wb')}
+            my_request = requests.post(url=file_url, files=files)
+
+upload_file()   
+```
+
 #### Retrieving Metadata
 
 To retrieve metadata, use the following code:
@@ -361,5 +378,21 @@ def download_file(num):
         pass
 ```
 
+##### Downloading File without urllib
 
+Similarly, it is possible to download a file without URLlib, the sample code can be found below:
+
+```python
+def download_file(num):
+    my_url = "https://firebasestorage.googleapis.com/v0/b/<PROJECT ID>appspot.com/o/<FOLDER>%2F<FILE>?alt=media"
+    r = requests.get(my_url)
+    with open(str(str(num) + ".jpg"), 'wb') as f:  
+        # In this case we are writing a jpg file
+        f.write(r.content)
+        f.close()
+    
+download_file(1)
+```
+
+It is important to take note of the ```?alt=media``` as it is what actually allows you to access the file.
 
