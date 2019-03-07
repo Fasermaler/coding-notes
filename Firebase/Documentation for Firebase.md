@@ -396,3 +396,9 @@ download_file(1)
 
 It is important to take note of the ```?alt=media``` as it is what actually allows you to access the file.
 
+
+
+##### Sample Code
+
+Some sample code for upload and retrieval of images has been included in this directory. They were pulled from an existing project without much modification so use it at your own discretion.
+
