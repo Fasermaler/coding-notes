@@ -402,3 +402,135 @@ It is important to take note of the ```?alt=media``` as it is what actually allo
 
 Some sample code for upload and retrieval of images has been included in this directory. They were pulled from an existing project without much modification so use it at your own discretion.
 
+### Firebase Storage using blobs
+
+This is a barebones summary of Google's documentation for Firebase Storage and using Blobs.
+
+#### Initializing  Firebase for Firebase Storage
+
+To use Firebase storage, first you must initialize your firebase app with an additional parameter.
+
+```python
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import storage
+
+cred = credentials.Certificate('path/to/serviceAccountKey.json')
+firebase_admin.initialize_app(cred, {
+    'storageBucket': '<BUCKET_NAME>.appspot.com'
+})
+
+bucket = storage.bucket()
+```
+
+The bucket used in this case would be the default bucket of your Firebase.
+
+### Uploading Objects
+
+To upload files to Firebase storage, you can upload it in a blob object as such
+
+```python
+def upload_blob(bucket_name, source_file_name, destination_blob_name):
+    """Uploads a file to the bucket."""
+    storage_client = storage.Client()
+    bucket = storage_client.get_bucket(bucket_name)
+    blob = bucket.blob(destination_blob_name)
+
+    blob.upload_from_filename(source_file_name)
+
+    print('File {} uploaded to {}.'.format(
+        source_file_name,
+        destination_blob_name))
+```
+
+This would store the target file in a folder with ```destination_blob_name``` in the target storage bucket on Firebase.
+
+### Listing Objects
+
+To list all objects stored in the storage bucket.
+
+```python
+def list_blobs(bucket_name):
+    """Lists all the blobs in the bucket."""
+    storage_client = storage.Client()
+    bucket = storage_client.get_bucket(bucket_name)
+
+    blobs = bucket.list_blobs()
+
+    for blob in blobs:
+        print(blob.name)
+```
+
+### Downloading Objects
+
+To download a specific blob from the storage bucket
+
+```python
+def download_blob(bucket_name, source_blob_name, destination_file_name):
+    """Downloads a blob from the bucket."""
+    storage_client = storage.Client()
+    bucket = storage_client.get_bucket(bucket_name)
+    blob = bucket.blob(source_blob_name)
+
+    blob.download_to_filename(destination_file_name)
+
+    print('Blob {} downloaded to {}.'.format(
+        source_blob_name,
+        destination_file_name))
+```
+
+### Retrieving Metadata
+
+To retrieve the metadata of a specific blob.
+
+```python
+def blob_metadata(bucket_name, blob_name):
+    """Prints out a blob's metadata."""
+    storage_client = storage.Client()
+    bucket = storage_client.get_bucket(bucket_name)
+    blob = bucket.get_blob(blob_name)
+
+    print('Blob: {}'.format(blob.name))
+    print('Bucket: {}'.format(blob.bucket.name))
+    print('Storage class: {}'.format(blob.storage_class))
+    print('ID: {}'.format(blob.id))
+    print('Size: {} bytes'.format(blob.size))
+    print('Updated: {}'.format(blob.updated))
+    print('Generation: {}'.format(blob.generation))
+    print('Metageneration: {}'.format(blob.metageneration))
+    print('Etag: {}'.format(blob.etag))
+    print('Owner: {}'.format(blob.owner))
+    print('Component count: {}'.format(blob.component_count))
+    print('Crc32c: {}'.format(blob.crc32c))
+    print('md5_hash: {}'.format(blob.md5_hash))
+    print('Cache-control: {}'.format(blob.cache_control))
+    print('Content-type: {}'.format(blob.content_type))
+    print('Content-disposition: {}'.format(blob.content_disposition))
+    print('Content-encoding: {}'.format(blob.content_encoding))
+    print('Content-language: {}'.format(blob.content_language))
+    print('Metadata: {}'.format(blob.metadata))
+    print("Temporary hold: ",
+          'enabled' if blob.temporary_hold else 'disabled')
+    print("Event based hold: ",
+          'enabled' if blob.event_based_hold else 'disabled')
+    if blob.retention_expiration_time:
+        print("retentionExpirationTime: {}"
+              .format(blob.retention_expiration_time))
+```
+
+### Deleting Objects
+
+To delete a specific blob on Firebase Storage
+
+```python
+def delete_blob(bucket_name, blob_name):
+    """Deletes a blob from the bucket."""
+    storage_client = storage.Client()
+    bucket = storage_client.get_bucket(bucket_name)
+    blob = bucket.blob(blob_name)
+
+    blob.delete()
+
+    print('Blob {} deleted.'.format(blob_name))
+```
+
