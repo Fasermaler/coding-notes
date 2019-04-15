@@ -62,27 +62,27 @@ Some information was referenced from the [Motor Wizard Guide](<https://cdn.shopi
 
 2. The tool should look like this:
 
-   ![1555306684586](assets/1555306684586.png)
+   ![1555308556859](assets/1555308556859.png)
 
 3. Plug in the one of the Flipsky VESCs to the computer via mini-USB cable. 
 
 4. Click on the connection icon in the top right corner.
 
-   - If prompted to update the software of the VESC, proceed to update![1555306802125](assets/1555306802125.png)
+   - If prompted to update the software of the VESC, proceed to update![1555308548007](assets/1555308548007.png)
 
 5. Alternatively, click on the ```connection``` tab in the left menu and select ```Autoconnect```:
 
-   ![1555306872364](assets/1555306872364.png)
+   ![1555308539968](assets/1555308539968.png)
 
 6. The VESC should now have a lit green LED. If there isn't a lit LED, check if the drive has been installed correctly or if the product is defective
 
 7. The motor setup wizard should appear, follow the steps accordingly
 
-   ![1555307116757](assets/1555307116757.png)
+   ![1555308527000](assets/1555308527000.png)
 
 8. In our case, we will be selecting Field Oriented Control (FOC):
 
-   ![1555307169414](assets/1555307169414.png)
+   ![1555308503717](assets/1555308503717.png)
 
 9. Under the motor setup wizard, enter the following parameters for the scooter motors used by the MOMObot:
 
@@ -101,7 +101,7 @@ Some information was referenced from the [Motor Wizard Guide](<https://cdn.shopi
 
 13. Proceed to the FOC settings wizard:
 
-    ![1555307558323](assets/1555307558323.png)
+    ![1555308490615](assets/1555308490615.png)
 
     - Press the RL button, the motor will begin to vibrate
 
@@ -109,7 +109,7 @@ Some information was referenced from the [Motor Wizard Guide](<https://cdn.shopi
 
     - After all red boxes turn green (indicating that VESC has detected the motor parameters), click on ```apply``` to apply the motor values.
 
-      ![1555307634886](assets/1555307634886.png)
+      ![1555308481700](assets/1555308481700.png)
 
 14. Under the Hall Sensor Detection wizard, ensure the motors can rotate freely
 
@@ -128,7 +128,7 @@ Next the app settings has to be configured accordingly. For MOMO control, we wil
 
 2. Configure the general app settings as follows:
 
-   ![1555307982953](assets/1555307982953.png)
+   ![1555308468557](assets/1555308468557.png)
 
 3. Configure the PPM settings as follows:
 
