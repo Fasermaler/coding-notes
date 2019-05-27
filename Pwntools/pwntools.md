@@ -20,50 +20,9 @@ I'm adapting this guide from various sources:
 - Some knowledge of assembly if you intend to use `gdb` and `asm`
 
 ## Table of Contents <a name="top"></a> 
-1. [Introduction](#1)
-2. [Installation](#2)
-3. [Getting Started](#3)
-   3.1   [Commonly used objects and routines](#3.1)
-4. [Context](#4)
-   4.1   [Basic Usage](#4.1)
-   4.2   [Context Settings](#4.2)
-5. [Tubes](#5)
-   5.1   [Basic I/O](#5.1)
- 	5.1.1 [Receiving Data](#5.1.1)
-   5.1.2 [Sending Data](#5.1.2)
-   5.1.3 [Integer Manipulation](#5.1.3)
-   5.2   [Processes and Basic Features](#5.2)
-   5.3   [Interacting with Shell](#5.3)
-   5.3.1 [Sending commands to Shell](5.3.1)
-   5.4   [Networking](#5.4)
-   5.4.1 [Connecting using Remote](#5.4.1)
-   5.4.2 [Connecting using Socket](#5.4.2)
-   5.4.4 [Listening to a client](#5.4.4)
-6. [Secure Shell (SSH)](#6)
-   6.1   [Multiple SSH Processes](#6.1)
-7. [Serial Port Connection](#7)
-8. [GNU Project Debugger (GDB)](#8)
-   8.1   [Attaching and Interacting with a process](#8.1)
-   8.2   [GDB Commands Explained](#8.2)
-9. [Assembly](#9)
-   9.1   [Command-line Tools](#9.1)
-   9.1.1 [Jumping into GDB](#9.1.1)
-   9.2   [Basic Assembly](#9.2)
-   9.3   [Canned Assembly](#9.3)
-10.[Executable and Linkable Format (ELF)](#10)
-   10.1  [Loading ELFs](#10.1)
-   10.2  [ELF Symbols](#10.2)
-   10.3  [Changing Base Addresses](10.3)
-   10.4  [Reading ELF Files](#10.4)
-   10.5  [Patching ELF Files](#10.5)
-   10.6  [Searching within an ELF File](#10.6)
-   10.7  [Building ELF Files from scratch](#10.7)
+
+
    
-   
-1. [Introduction](#1)  
-2. [Basic C++ Syntax Reference](#2)    
-   2.1   [Comments](#2.1)    
-   2.2   [Importing Libraries](#2.2) 
 
 ## 1. Introduction <a name="1"></a>
 
