@@ -10,6 +10,8 @@ I'm adapting this guide from various sources:
 - [Gallopsled's pwntools tutorial](https://github.com/Gallopsled/pwntools-tutorial)
 - Other sources will be be cited when referenced
 
+------
+
 ## Pre-Requisites
 
 - Basic Python
@@ -21,7 +23,7 @@ I'm adapting this guide from various sources:
 1. [Introduction](#1)
 2. [Installation](#2)
 3. [Getting Started](#3)
-   3.1	[Commonly used objects and routines](#3.1)
+   3.1   [Commonly used objects and routines](#3.1)
 4. [Context](#4)
    4.1	[Basic Usage](#4.1)
    4.2	[Context Settings](#4.2)
@@ -56,6 +58,12 @@ I'm adapting this guide from various sources:
    10.5	[Patching ELF Files](#10.5)
    10.6	[Searching within an ELF File](#10.6)
    10.7	[Building ELF Files from scratch](#10.7)
+   
+   
+1. [Introduction](#1)  
+2. [Basic C++ Syntax Reference](#2)    
+   2.1   [Comments](#2.1)    
+   2.2   [Importing Libraries](#2.2) 
 
 ## 1. Introduction <a name="1"></a>
 
