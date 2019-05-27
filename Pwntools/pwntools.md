@@ -17,11 +17,13 @@ I'm adapting this guide from various sources:
 - Some understanding as to how computers work
 - Some knowledge of assembly if you intend to use `gdb` and `asm`
 
-## Table of Contents
+## Table of Contents <a name="top"></a> 
 
-[TOC]
+1. [Introduction](#1)
+2. [Installation](#2)
+3. [Getting Started](#3)
 
-## Introduction
+## 1. Introduction <a name="1"></a>
 
 Pwntools is a powerful python library that is useful in writing exploits and CTF games. Pwntools is all about saving time and should be used as such - it is not a penetrative testing suite nor a "cracking script". It merely improves the ease of using existing tools (such as SSH, GDB, ASM). It is also great for learning how computers works on a more fundamental level - as the saying goes, "Hack to learn, not learn to hack"!
 
@@ -33,7 +35,8 @@ Interesting uses I've found for Pwntools include:
 - De-constructing my own programs to learn about them and find flaws
 - Starting ROS processes on a remote computer via SSH (yes)
 
-## Installation
+## 2. Installation <a name="2"></a>
+[go to top](#top)
 
 I would recommend working on Pwntools on Linux as it makes things a lot simpler.
 
@@ -46,7 +49,8 @@ $ pip install --upgrade pip
 $ pip install --upgrade pwntools
 ```
 
-## Getting Started
+## 3. Getting Started <a name="3"></a>
+[go to top](#top)
 
 The easiest way to get started with pwntools is to import everything:
 
@@ -64,6 +68,7 @@ Whichever way Pwntools is imported, the following functions are imported automat
 - `random`
 
 ### Commonly used objects and routines
+[go to top](#top)
 
 The following is a list of commonly used objects and routines that are imported (in order of relative use and importance)
 
@@ -133,6 +138,7 @@ The following is a list of commonly used objects and routines that are imported 
 
 
 ## Context
+[go to top](#top)
 
 Before going into anything else, it is important to go over `context` as it is a global, thread-aware object that sets overarching (no pun intended) settings.
 
@@ -143,6 +149,7 @@ Before going into anything else, it is important to go over `context` as it is a
 - [Endian Byte Order Explained](https://betterexplained.com/articles/understanding-big-and-little-endian-byte-order/)
 
 ### Basic Usage
+[go to top](#top)
 
 The basic context involves setting the architecture for the script/exploit. 
 
@@ -175,6 +182,7 @@ It is also possible to use the `with` keyword to make certain parts of the code 
 ```
 
 ### Context Settings
+[go to top](#top)
 
 - `arch`
 
@@ -201,17 +209,20 @@ It is also possible to use the `with` keyword to make certain parts of the code 
   - `little`: Least significant byte is stored first and sent first, followed by the rest in increasing significance order
   - More information on endian [here](https://www.geeksforgeeks.org/little-and-big-endian-mystery/)
 - `log_file`
+  
   - Defines the logging file to send log output to
 - `log_level`
   - Probably one of the most useful features of `context`, it is also scope-aware and can be used with the `with` keyword
   - Possible values: `CRITICAL`, `DEBUG`, `ERROR`, `INFO`, `NOTSET`, `WARN`, `WARNING`
 -  `sign`
+  
   - Defines integer packings' signed-ness. Default is `unsigned`
 - `terminal`
   - Defines the preferred terminal for new windows
   - As a terminal user, I like to set this to `context.terminal = ["terminator", "-e"]`. This allows new windows to be opened in terminator (which is awesome)
 
 ## Tubes
+[go to top](#top)
 
 Probably some of the most important objects and routines for CTF, Tubes are the I/O wrappers for most types of I/O required:
 
@@ -225,10 +236,12 @@ Probably some of the most important objects and routines for CTF, Tubes are the 
 For CTF, the most important is going to be SSH and remote TCP/UDP connections - after all, being unable to connect to the game server means nothing can be accomplished.
 
 ### Basic I/O
+[go to top](#top)
 
 Some basic I/O operations are covered in this section.
 
 #### Receiving Data
+[go to top](#top)
 
 - `recv(n)` - Receive any number of available bytes
 - `recvline()` - Receive data until a newline is encountered
@@ -238,16 +251,19 @@ Some basic I/O operations are covered in this section.
 - `clean()` - Discard buffered data
 
 #### Sending Data
+[go to top](#top)
 
 - `send(data)` - Sends data
 - `sendline(line)` - Sends data and a newline
 
 #### Integer Manipulation
+[go to top](#top)
 
 - `pack(int)` - Send a word-size packed integer
 - `unpack()` - Receives and unpacks a word-sized integer
 
 ### Processes and Basic Features
+[go to top](#top)
 
 To enable a tube to talk to a process, a `process` object has to be created and pointed to the target binary.
 
@@ -288,6 +304,7 @@ It is also possible to read binary data.
 ```
 
 ### Interacting with Shell
+[go to top](#top)
 
 The `.interactive()` method allows you to interact with a remote shell on a game server.
 
@@ -300,6 +317,7 @@ user
 ```
 
 #### Sending commands to Shell
+[go to top](#top)
 
 Using `.sendline()` it is possible to send commands directly to the shell.
 
@@ -314,10 +332,12 @@ Using `.sendline()` it is possible to send commands directly to the shell.
 Now the target binary (in this case, named `binary`) will be running.
 
 ### Networking
+[go to top](#top)
 
 In the same vein, it is possible to define a remote IO connection (network connection).
 
 #### Connecting using Remote
+[go to top](#top)
 
 ```python
 >>>from pwn import *
@@ -328,6 +348,7 @@ b'HTTP'
 ```
 
 #### Connecting using Socket
+[go to top](#top)
 
 ```python
 >>> import socket
@@ -341,6 +362,7 @@ b'HTTP'
 ```
 
 #### Specifying Protocol
+[go to top](#top)
 
 It is also possible to specify the protocol when connecting.
 
@@ -351,6 +373,7 @@ It is also possible to specify the protocol when connecting.
 ```
 
 #### Listening to a client
+[go to top](#top)
 
 Listening to the client is also rather easy.
 
@@ -360,6 +383,7 @@ Listening to the client is also rather easy.
 ```
 
 ### Secure Shell (SSH)
+[go to top](#top)
 
 SSH is another bread and butter of CTF games. Most servers will require connection via SSH (or netcat). SSH is a very versatile framework as it allows for portforwarding, file upload / download and etc but requires the target machine to enable it.
 
@@ -378,6 +402,7 @@ To learn more about the prompt strings `PS1`, `PS2`, `PS3` and `PS4`, look [here
 Personally, this is an extremely useful class because it allows for complete automation of the CTF task, which makes iteration rather painless.
 
 #### Multiple SSH Processes
+[go to top](#top)
 
 Creating multiple SSH processes is quite simple - it's possible to simply latch onto the same `session` but create multiple `process` objects. In the following example, it is the equivalent of opening multiple terminals in the remote shell:
 
@@ -389,6 +414,7 @@ Creating multiple SSH processes is quite simple - it's possible to simply latch 
 ```
 
 ### Serial Port Connection
+[go to top](#top)
 
 In the case of local hacking, Tubes also supports serial connection. I won't go into much detail about this as it is unlikely to be used but here is the [full documentation](https://pwntools.readthedocs.org/en/latest/tubes/serial.html).
 
@@ -406,6 +432,7 @@ ls /dev/tty*
 
 
 ## GNU Project Debugger (GDB)
+[go to top](#top)
 
 GDB is a very useful tool for debugging a target binary. In many cases, the source for the target binary would not be made available and thus GDB allows the user to set breakpoints, check variables and develop an exploit (or not). 
 
@@ -422,6 +449,7 @@ However, in my (humble) opinion, the Pwntools GDB library allows for faster iter
 Maybe one day I might see it fit to write a proper stand-alone GDB guide.
 
 ### Attaching and Interacting with a process
+[go to top](#top)
 
 To attach to an exiting process use the `attach()` routine.
 
@@ -465,6 +493,7 @@ continue
 ```
 
 ### GDB Commands Explained
+[go to top](#top)
 
 As seen in the previous section, the `gdb.attach()` (and `gdb.debug()`) can encapsulate GDB commands. Some of the basic commands are as follows:
 
@@ -514,6 +543,7 @@ As seen in the previous section, the `gdb.attach()` (and `gdb.debug()`) can enca
 GDB shell supports assembly and disassembly as well, but in the case of pwntools, it is better to leave that to the `asm` and `disasm` classes.
 
 ## Assembly
+[go to top](#top)
 
 Probably one of the finer aspects of pwntools, it can perform assembly in most common architectures and then some. As mentioned in the first section, it also comes with canned shellcode that is reusable and customizable.
 
@@ -522,6 +552,7 @@ This section will be updated as I gain more experience in the matter.
 [Assembly Explained](https://www.cs.virginia.edu/~evans/cs216/guides/x86.html)
 
 ### Command-line Tools
+[go to top](#top)
 
 These are command-line versions of the pwnlibs.asm library. This allows the user to quickly test shellcode or emit ELF files (or whatever else they'd like to do).
 
@@ -584,6 +615,7 @@ These are command-line versions of the pwnlibs.asm library. This allows the user
     ```
 
 #### Jumping into GDB
+[go to top](#top)
 
 One more cool thing is that you can jump straight into GDB from the command line using the `--debug` flag.
 
@@ -600,6 +632,7 @@ $ asm 'mov eax, 1; int 0x80;' --debug
 ```
 
 ### Basic Assembly
+[go to top](#top)
 
 Converting assembly to shell code is relatively straightforward:
 
@@ -614,6 +647,7 @@ Converting assembly to shell code is relatively straightforward:
 Unsurprisingly, you can't print assembly out of the box, thus the `repr()` or `enhex()` functions are use to get a desired representation.
 
 ### Canned Assembly
+[go to top](#top)
 
 The `shellcraft` module contains plenty of pre-canned, customizable assembly. Because `shellcraft` varies from architecture to architecture, the [full documentation](http://docs.pwntools.com/en/stable/shellcraft.html) is significantly more comprehensive and allows you to peruse `shellcraft` for the appropriate architecture.
 
@@ -652,6 +686,7 @@ Shellcode `cat` example for `aarch64.linux`:
 
 
 ## Executable and Linkable Format (ELF)
+[go to top](#top)
 
 [ELFs](https://elinux.org/Executable_and_Linkable_Format_(ELF)) are common file format for executable files, object code, shared libraries and core dumps. Because it is not bound to any processor or architecture, it is widely used and thus is worked with for [reverse engineering, forensics (and other) purposes](http://fluxius.handgrep.se/2011/10/20/the-art-of-elf-analysises-and-exploitations/).
 
@@ -660,6 +695,7 @@ More documentation [here](http://docs.pwntools.com/en/stable/elf.html).
 One of the main benefits of using ELFs is to ensure exploits are robust, allowing addresses to be obtained dynamically instead of being hard-oded into the exploit.
 
 ### Loading ELFs
+[go to top](#top)
 
 To load an ELF, simply initialize the ELF object pointing to the target file:
 
@@ -669,6 +705,7 @@ To load an ELF, simply initialize the ELF object pointing to the target file:
 ```
 
 ### ELF Symbols
+[go to top](#top)
 
 ELF objects have different sets of symbols, accessible in the form of attributes:
 
@@ -704,6 +741,7 @@ Example:
 This allows you to get the addresses dynamically, which can then be parsed or used for other functions, keeping exploits robust and agnostic.
 
 ### Changing Base Addresses
+[go to top](#top)
 
 To change a base address, simply update the `.address` attribute of the ELF object. The other symbols will also change to reflect this:
 
@@ -735,6 +773,7 @@ To change a base address, simply update the `.address` attribute of the ELF obje
 
 
 ### Reading ELF Files
+[go to top](#top)
 
 Reading ELF files is relatively straightforward as well. Using the `read` function as well as the `repr` function to enable a proper print out.
 
@@ -763,6 +802,7 @@ License GPLv3+
 ```
 
 ### Patching ELF Files
+[go to top](#top)
 
 In this case, we can patch the bash ELF file to obtain a modified version of bash. Do be careful when saving so as to not mess up the original files.
 
@@ -799,6 +839,7 @@ No chdir for you!
 ```
 
 ### Searching within an ELF File
+[go to top](#top)
 
 The following is the documentation recommended format for searching through an ELF file for a specific `execve` call.
 
@@ -814,6 +855,7 @@ The following is the documentation recommended format for searching through an E
 This will return addresses for the specific `execve` call.
 
 ### Building ELF Files from scratch
+[go to top](#top)
 
 The following are some simple examples on creating an ELF file from scratch. All of these functions return an ELF object which can be saved.
 
