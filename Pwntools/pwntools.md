@@ -50,7 +50,7 @@ I'm adapting this guide from various sources:
    9.1.1 [Jumping into GDB](#9.1.1)
    9.2   [Basic Assembly](#9.2)
    9.3   [Canned Assembly](#9.3)
-10. [Executable and Linkable Format (ELF)](#10)
+10.[Executable and Linkable Format (ELF)](#10)
    10.1  [Loading ELFs](#10.1)
    10.2  [ELF Symbols](#10.2)
    10.3  [Changing Base Addresses](10.3)
