@@ -7,6 +7,11 @@ Just a collection of random notes because I tend to forget things.
 - Firebase
   - Firebase-admin SDK Documentation
   - Blob Documentation
+- Pwntools
+  - Tubes
+  - GDB
+  - Assembly
+  - ELF
 - Flipsky VESC
   - Introduction
   - Connections
