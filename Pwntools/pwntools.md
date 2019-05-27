@@ -21,7 +21,44 @@ I'm adapting this guide from various sources:
 
 ## Table of Contents <a name="top"></a> 
 
-
+1. [Introduction](#1)<br/>
+2. [Installation](#2)<br/>
+3. [Getting Started](#3)<br/>
+   3.1   [Commonly used objects and routines](#3.1)<br/>
+4. [Context](#4)<br/>
+   4.1   [Basic Usage](#4.1)<br/>
+   4.2   [Context Settings](#4.2)<br/>
+5. [Tubes](#5)<br/>
+   5.1   [Basic I/O](#5.1)<br/>
+ 	5.1.1 [Receiving Data](#5.1.1)<br/>
+   5.1.2 [Sending Data](#5.1.2)<br/>
+   5.1.3 [Integer Manipulation](#5.1.3)<br/>
+   5.2   [Processes and Basic Features](#5.2)<br/>
+   5.3   [Interacting with Shell](#5.3)<br/>
+   5.3.1 [Sending commands to Shell](5.3.1)<br/>
+   5.4   [Networking](#5.4)<br/>
+   5.4.1 [Connecting using Remote](#5.4.1)<br/>
+   5.4.2 [Connecting using Socket](#5.4.2)<br/>
+   5.4.4 [Listening to a client](#5.4.4)<br/>
+6. [Secure Shell (SSH)](#6)<br/>
+   6.1   [Multiple SSH Processes](#6.1)<br/>
+7. [Serial Port Connection](#7)<br/>
+8. [GNU Project Debugger (GDB)](#8)<br/>
+   8.1   [Attaching and Interacting with a process](#8.1)<br/>
+   8.2   [GDB Commands Explained](#8.2)<br/>
+9. [Assembly](#9)<br/>
+   9.1   [Command-line Tools](#9.1)<br/>
+   9.1.1 [Jumping into GDB](#9.1.1)<br/>
+   9.2   [Basic Assembly](#9.2)<br/>
+   9.3   [Canned Assembly](#9.3)<br/>
+10. [Executable and Linkable Format (ELF)](#10)<br/>
+   10.1  [Loading ELFs](#10.1)<br/>
+   10.2  [ELF Symbols](#10.2)<br/>
+   10.3  [Changing Base Addresses](10.3)<br/>
+   10.4  [Reading ELF Files](#10.4)<br/>
+   10.5  [Patching ELF Files](#10.5)<br/>
+   10.6  [Searching within an ELF File](#10.6)<br/>
+   10.7  [Building ELF Files from scratch](#10.7)<br/>
    
 
 ## 1. Introduction <a name="1"></a>
@@ -705,7 +742,7 @@ To load an ELF, simply initialize the ELF object pointing to the target file:
 >>> e = ELF('/bin/cat')
 ```
 
-### 10.2 ELF Symbols <a name="10.1">
+### 10.2 ELF Symbols <a name="10.2">
 [go to top](#top)
 
 ELF objects have different sets of symbols, accessible in the form of attributes:
