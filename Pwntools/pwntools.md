@@ -30,7 +30,7 @@ I'm adapting this guide from various sources:
    4.2   [Context Settings](#4.2)<br/>
 5. [Tubes](#5)<br/>
    5.1   [Basic I/O](#5.1)<br/>
- 	5.1.1 [Receiving Data](#5.1.1)<br/>
+	 	5.1.1 [Receiving Data](#5.1.1)<br/>
    5.1.2 [Sending Data](#5.1.2)<br/>
    5.1.3 [Integer Manipulation](#5.1.3)<br/>
    5.2   [Processes and Basic Features](#5.2)<br/>
@@ -52,14 +52,14 @@ I'm adapting this guide from various sources:
    9.2   [Basic Assembly](#9.2)<br/>
    9.3   [Canned Assembly](#9.3)<br/>
 10. [Executable and Linkable Format (ELF)](#10)<br/>
-   10.1  [Loading ELFs](#10.1)<br/>
-   10.2  [ELF Symbols](#10.2)<br/>
-   10.3  [Changing Base Addresses](10.3)<br/>
-   10.4  [Reading ELF Files](#10.4)<br/>
-   10.5  [Patching ELF Files](#10.5)<br/>
-   10.6  [Searching within an ELF File](#10.6)<br/>
-   10.7  [Building ELF Files from scratch](#10.7)<br/>
-   
+      10.1  [Loading ELFs](#10.1)<br/>
+      10.2  [ELF Symbols](#10.2)<br/>
+      10.3  [Changing Base Addresses](10.3)<br/>
+      10.4  [Reading ELF Files](#10.4)<br/>
+      10.5  [Patching ELF Files](#10.5)<br/>
+      10.6  [Searching within an ELF File](#10.6)<br/>
+      10.7  [Building ELF Files from scratch](#10.7)<br/>
+
 
 ## 1. Introduction <a name="1"></a>
 
@@ -192,8 +192,8 @@ Before going into anything else, it is important to go over `context` as it is a
 The basic context involves setting the architecture for the script/exploit. 
 
 ```python
->>>from pwn import *
->>>context.arch = 'amd64' # Sets the architecture to amd64
+>>> from pwn import *
+>>> context.arch = 'amd64' # Sets the architecture to amd64
 ```
 
 This means that Pwntools will generate shellcode for `amd64` and the default word size will be 64 bits.
@@ -201,8 +201,8 @@ This means that Pwntools will generate shellcode for `amd64` and the default wor
 It is also possible to clear the context and update it:
 
 ```python
->>>context.clear()
->>>context.update(arch='i386', os='linux')
+>>> context.clear()
+>>> context.update(arch='i386', os='linux')
 ```
 
 This clears the context and updates both the architecture and operating system.
@@ -347,9 +347,9 @@ It is also possible to read binary data.
 The `.interactive()` method allows you to interact with a remote shell on a game server.
 
 ```python
->>>from pwn import *
->>>game_io = process('sh')
->>>game_io.interactive()
+>>> from pwn import *
+>>> game_io = process('sh')
+>>> game_io.interactive()
 $ whoami # Interact with the game shell directly
 user
 ```
@@ -360,11 +360,11 @@ user
 Using `.sendline()` it is possible to send commands directly to the shell.
 
 ```python
->>>from pwn import *
->>>p = process('sh')
+>>> from pwn import *
+>>> p = process('sh')
 [x] Starting local process '/bin/sh'
 [+] Starting local process '/bin/sh': pid 19972
->>>p.sendline('./binary')
+>>> p.sendline('./binary')
 ```
 
 Now the target binary (in this case, named `binary`) will be running.
@@ -378,7 +378,7 @@ In the same vein, it is possible to define a remote IO connection (network conne
 [go to top](#top)
 
 ```python
->>>from pwn import *
+>>> from pwn import *
 >>> r = remote('google.com', 443, ssl=True)
 >>> r.send('GET /\r\n\r\n')
 >>> r.recvn(4)
@@ -405,9 +405,9 @@ b'HTTP'
 It is also possible to specify the protocol when connecting.
 
 ```python
->>>from pwn import *
->>>dns  = remote('8.8.8.8', 53, typ='udp')
->>>tcp6 = remote('google.com', 80, fam='ipv6')
+>>> from pwn import *
+>>> dns  = remote('8.8.8.8', 53, typ='udp')
+>>> tcp6 = remote('google.com', 80, fam='ipv6')
 ```
 
 #### 5.4.4 Listening to a client <a name="5.4.4">
@@ -416,8 +416,8 @@ It is also possible to specify the protocol when connecting.
 Listening to the client is also rather easy.
 
 ```python
->>>from pwn import *
->>>client = listen(8080).wait_for_connection()
+>>> from pwn import *
+>>> client = listen(8080).wait_for_connection()
 ```
 
 ### 6. Secure Shell (SSH) <a name="6">
@@ -426,11 +426,11 @@ Listening to the client is also rather easy.
 SSH is another bread and butter of CTF games. Most servers will require connection via SSH (or netcat). SSH is a very versatile framework as it allows for portforwarding, file upload / download and etc but requires the target machine to enable it.
 
 ```python
->>>from pwn import *
->>>session = ssh('user', 'CTFgameserver.org', password='password')
->>>io = session.process('sh', env={"PS1":""}) # Set the environment to prompt string 1
->>> #<insert exploit here>
->>>io.interactive()
+>>> from pwn import *
+>>> session = ssh('user', 'CTFgameserver.org', password='password')
+>>> io = session.process('sh', env={"PS1":""}) # Set the environment to prompt string 1
+#<insert exploit here>
+>>> io.interactive()
 $ whoami
 user
 ```
@@ -445,10 +445,10 @@ Personally, this is an extremely useful class because it allows for complete aut
 Creating multiple SSH processes is quite simple - it's possible to simply latch onto the same `session` but create multiple `process` objects. In the following example, it is the equivalent of opening multiple terminals in the remote shell:
 
 ```python
->>>from pwn import *
->>>session = ssh('user', 'CTFgameserver.org', password='password')
->>>io1 = session.process('sh', env={"PS1":""}) 
->>>io2 = session.process('sh', env={"PS1":""}) 
+>>> from pwn import *
+>>> session = ssh('user', 'CTFgameserver.org', password='password')
+>>> io1 = session.process('sh', env={"PS1":""}) 
+>>> io2 = session.process('sh', env={"PS1":""}) 
 ```
 
 ### 7. Serial Port Connection <a name="7">
@@ -457,8 +457,8 @@ Creating multiple SSH processes is quite simple - it's possible to simply latch 
 In the case of local hacking, Tubes also supports serial connection. I won't go into much detail about this as it is unlikely to be used but here is the [full documentation](https://pwntools.readthedocs.org/en/latest/tubes/serial.html).
 
 ```python
->>>from pwn import *
->>>io = serialtube('/dev/ttyUSB0', baudrate=115200)
+>>> from pwn import *
+>>> io = serialtube('/dev/ttyUSB0', baudrate=115200)
 ```
 
 Remember that it is possible to check what devices exist using the following command:
@@ -494,36 +494,36 @@ To attach to an exiting process use the `attach()` routine.
 Attach to a PID directly:
 
 ```python
->>>from pwn import *
->>>gdb.attach(1111)
+>>> from pwn import *
+>>> gdb.attach(1111)
 ```
 
 Attach to youngest "bash" process:
 
 ```python
->>>from pwn import *
->>>gdb.attach('bash')
->>>gdb.sendline('whoami') # Interact with the process
+>>> from pwn import *
+>>> gdb.attach('bash')
+>>> gdb.sendline('whoami') # Interact with the process
 ```
 
 Attaching to a remote shell:
 
 ```python
->>>server = process(['socat', 'tcp-listen:1234,fork,reuseaddr', 'exec:/bin/sh'])
->>>io = remote('localhost', 1234)
->>>gdb.attach(io, '''
+>>> server = process(['socat', 'tcp-listen:1234,fork,reuseaddr', 'exec:/bin/sh'])
+>>> io = remote('localhost', 1234)
+>>> gdb.attach(io, '''
 break exit
 continue
 ''') # These extra lines are similar to the GDB commands
->>>io.sendline('exit') # Interacting with the new bash process
+>>> io.sendline('exit') # Interacting with the new bash process
 ```
 
 Starting a process on the remote server:
 
 ```python
->>>game_shell = ssh('user', 'CTFgameserver.org', password='password'', port=2220)
->>>cat = shell.process(['cat']) # Starts a new shell process
->>>gdb.attach(cat, '''
+>>> game_shell = ssh('user', 'CTFgameserver.org', password='password'', port=2220)
+>>> cat = shell.process(['cat']) # Starts a new shell process
+>>> gdb.attach(cat, '''
 break exit
 continue
 ''')
@@ -738,7 +738,7 @@ One of the main benefits of using ELFs is to ensure exploits are robust, allowin
 To load an ELF, simply initialize the ELF object pointing to the target file:
 
 ```python
->>>from pwn import *
+>>> from pwn import *
 >>> e = ELF('/bin/cat')
 ```
 
@@ -784,8 +784,8 @@ This allows you to get the addresses dynamically, which can then be parsed or us
 To change a base address, simply update the `.address` attribute of the ELF object. The other symbols will also change to reflect this:
 
 ```python
->>>from pwn import *
->>>e = ELF('/bin/bash')
+>>> from pwn import *
+>>> e = ELF('/bin/bash')
 [*] '/bin/bash'
     Arch:     amd64-64-little
     RELRO:    Partial RELRO
@@ -814,8 +814,8 @@ To change a base address, simply update the `.address` attribute of the ELF obje
 Reading ELF files is relatively straightforward as well. Using the `read` function as well as the `repr` function to enable a proper print out.
 
 ```python
->>>from pwn import *
->>>e = ELF('/bin/bash')
+>>> from pwn import *
+>>> e = ELF('/bin/bash')
 [*] '/bin/bash'
     Arch:     amd64-64-little
     RELRO:    Partial RELRO
@@ -823,15 +823,15 @@ Reading ELF files is relatively straightforward as well. Using the `read` functi
     NX:       NX enabled
     PIE:      No PIE (0x400000)
     FORTIFY:  Enabled
->>>print repr(e.read(e.address, 4))
+>>> print repr(e.read(e.address, 4))
 '\x7fELF'
->>>p_license = e.symbols['bash_license']
->>>license   = e.unpack(p_license)
->>>print "%#x -> %#x" % (p_license, license)
+>>> p_license = e.symbols['bash_license']
+>>> license   = e.unpack(p_license)
+>>> print "%#x -> %#x" % (p_license, license)
 0x4ba738 -> 0x4ba640
->>>print e.read(license, 14)
+>>> print e.read(license, 14)
 License GPLv3+
->>>print e.disasm(e.symbols['main'], 12)
+>>> print e.disasm(e.symbols['main'], 12)
   41eab0:       41 57                   push   r15
   41eab2:       41 56                   push   r14
   41eab4:       41 55                   push   r13
@@ -843,21 +843,21 @@ License GPLv3+
 In this case, we can patch the bash ELF file to obtain a modified version of bash. Do be careful when saving so as to not mess up the original files.
 
 ```python
->>>from pwn import *
->>>e = ELF('/bin/bash')
+>>> from pwn import *
+>>> e = ELF('/bin/bash')
 
 # Cause a debug break on the 'exit' command
->>>e.asm(e.symbols['exit_builtin'], 'int3')
+>>> e.asm(e.symbols['exit_builtin'], 'int3')
 
 # Disable chdir and just print it out instead
->>>e.pack(e.got['chdir'], e.plt['puts'])
+>>> e.pack(e.got['chdir'], e.plt['puts'])
 
 # Change the license
->>>p_license = e.symbols['bash_license']
->>>license = e.unpack(p_license)
->>>e.write(license, 'Hello, world!\n\x00')
+>>> p_license = e.symbols['bash_license']
+>>> license = e.unpack(p_license)
+>>> e.write(license, 'Hello, world!\n\x00')
 
->>>e.save('./bash-modified')
+>>> e.save('./bash-modified')
 ```
 
 We can then run `bash-modified` which is saved in our working directory to yield some peculiar behaviors.
@@ -880,11 +880,11 @@ No chdir for you!
 The following is the documentation recommended format for searching through an ELF file for a specific `execve` call.
 
 ```python
->>>from pwn import *
+>>> from pwn import *
 
->>>e = ELF('/bin/bash')
+>>> e = ELF('/bin/bash')
 
->>>for address in e.search('/bin/sh\x00'):
+>>> for address in e.search('/bin/sh\x00'):
 ...    print hex(address)
 ```
 
@@ -898,17 +898,17 @@ The following are some simple examples on creating an ELF file from scratch. All
 `from_bytes`:
 
 ```python
->>>from pwn import *
->>>e = ELF.from_bytes('\xcc')
->>>e.save('int3-1')
+>>> from pwn import *
+>>> e = ELF.from_bytes('\xcc')
+>>> e.save('int3-1')
 ```
 
 `from_assembly`:
 
 ```python
->>>from pwn import *
->>>e = ELF.from_assembly('nop', arch='powerpc')
->>>e.save('powerpc-nop')
+>>> from pwn import *
+>>> e = ELF.from_assembly('nop', arch='powerpc')
+>>> e.save('powerpc-nop')
 ```
 
 
