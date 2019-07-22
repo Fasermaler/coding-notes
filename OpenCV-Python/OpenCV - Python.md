@@ -1,6 +1,8 @@
-# rOpenCV - Python
+# OpenCV - Python
 
 Author: Fasermaler
+
+
 
 This documentation serves to collate various OpenCV concepts I have had to work with into easy-to-use template code.
 
@@ -295,6 +297,86 @@ In this example, the image is split into 4 equally sized images. The way this is
 
 The script then proceeds to slice the image 4 times to form 4 cropped images which are then placed within a crop array to be returned by the function.
 
+## Keystrokes
+
+OpenCV uses the `waitKey` function to draw new frames on to any OpenCV active windows. This means that the `waitKey` function has 2 secondary purposes
+
+- Primary Function: Update the window 
+- Secondary Function 1: Allows developer to control the delay of the update loop
+- Secondary Function 2: Allows developer to check for specific keystrokes to do specific actions
+
+### Close Program
+
+The most ubiquitous use of all is the use of the `waitKey` function to close a program.
+
+In most OpenCV programs (especially pertaining to video), there is an active loop within the program. Should this loop be handled or exited incorrectly, it can cause various memory or GPU issues. 
+
+This is why the `waitKey` function is often used to check if the quit key (usually assigned to `q` by convention) has been pressed.
+
+```python
+while True:
+    ret, frame = cap.read()
+    if ret:
+        cv2.imshow('frame', frame)
+    
+    # if 'q' was pressed, break out of the loop
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+        
+cap.release()
+cv2.destroyAllWindows()
+```
+
+### Adding Additional User Functionality with Keystrokes
+
+Most people have taken to appending `if cv2.waitKey(1) & 0xFF == ord('q'):` automatically to the end of their loops. But I personally think that the next approach, while more verbose is superior. It is more extensible and builds a better habit than appending a line without thinking about what it actually means.
+
+In the case where you'd like to add a functionality to `c`apture an image in a video stream, the `waitKey` function can also be used to help detect the `c` keystroke just like it was used to detect the `q` keystroke as a break condition.
+
+```python
+key = cv2.waitKey(1) & 0xFF
+
+if key == ord("q"):
+    break
+elif key == ord('c'):
+	cv2.imwrite('output.jpg', image)
+```
+
+#### Working with Special Keys
+
+In the event that a special key is desired such as `Esc`, `spacebar` and etc. The dec code of the key can be used instead. Refer to the [ASCII table](http://www.asciitable.com/) for specific dec codes.
+
+The following is a snippet of code from an ROI selection utility I wrote in the past. In this case, the `Esc` key is used to allow the user to reset the currently selected ROI points.
+
+```python
+# Various key events
+key = cv2.waitKey(1) & 0xFF
+
+# Esc key will reset the ref_points list
+if key == 27: # 27 is the dec value for the Escape Character
+    ref_points = []
+    status = "RESET"
+
+# U key will remove last point selected
+if key == ord('u'):
+    ref_points.pop()
+    status = "UNDO"
+    
+# S key will save if the ref_points list has 4 points
+if key == ord('s'):
+	if len(ref_points) < 4:
+		status = "ERROR"
+	else:
+        cfg_read.write_roi_coordinates(*corrected_ref_points)
+        status = "SAVED"
+        
+# Q will exit
+if key == ord('q'):
+	break
+```
+
+
+
 ## Working with Picamera
 
 The RPi Picamera is unique as it connects directly to the RPi using a ribbon cable. Due too this it requires use of the `picamera` library (to be installed separately) and does not use the `VideoCapture` object.
@@ -419,8 +501,6 @@ for img in camera.capture_continuous(rawCapture, format="bgr", use_video_port=Tr
     
     rawCapture.truncate(0)
 ```
-
-
 
 ### Scripts
 
