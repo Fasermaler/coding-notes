@@ -598,7 +598,7 @@ Black Hat and Top Hat are more advanced morphological transforms. In a Black hat
 
 Instead of talking about the theory, here is a practical example a cross-kernel being used to do a blackhat/tophat transform on an arrow to detect key features:
 
-![1563810074231](../../../Consistently%20Updated/coding-notes/OpenCV-Python/assets/1563810074231.png)
+![1563810074231](./assets/1563810074231.png)
 
 By comparing the eroded features, we can see if 2 of the points are on the left or right of the centroid to determine the direction of the arrow.
 
