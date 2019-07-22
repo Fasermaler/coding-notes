@@ -6,6 +6,8 @@ This documentation serves to collate various OpenCV concepts I had to self-learn
 
 This will not be a carbon copy of the [OpenCV documentation](https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_tutorials.html) because it would not make sense to lift the official docs when referencing the official docs is faster and more comprehensive. Instead, it serves to bridge the holes in understanding and certain approaches I have found to work in the past.
 
+I will also attempt to supplement the content with real problems and solutions I have worked on in the past where possible.
+
 ## Imports
 
 ### Basic Imports
@@ -502,9 +504,124 @@ The following are the scripts available in the sample code/template code folder:
 - `pi_camera_single_frame.py`: Grabs a single pi camera frame and displays it. Can be used to test if the pi camera even works
 - `pi_camera_video.py`: Grabs video output from the pi camera. Has various options for the camera as well as the option to flush the frame buffer. Also allows you to capture the active frame by pressing `c`.
 
-## Miscellaneous Tricks
+## Morphology Transforms
 
-Some miscellaneous functions and tricks that I use.
+Morphology transforms are very useful in image processing to bring out certain features or reducing unwanted noise to create a stronger signal.
+
+### Preparing an Image for Morphology Transforms
+
+#### Convert to Grayscale
+
+Morphology transforms can only be be applied to grayscale images. One way to get a grayscale image is to simple convert to grayscale.
+
+This can be done using the `.cvtColor()` function:
+
+```python
+gray_image = cv2.cvtColor(raw_img, cv2.COLOR_BGR2GRAY)
+```
+
+#### Image Thresholding
+
+The other more common way to get a gray image is to simply do some form of thresholding to clean up the signal in the first place. By doing so, the image becomes cleaner as noise is filtered and a grayscale image is obtained automatically.
+
+Here is a simple example of how to apply a binary threshold:
+
+```python
+ret, thresh_img = cv2.threshold(raw_img,10,255,cv2.THRESH_BINARY)
+```
+
+`ret` is simply the return (`True` / `False`)  while `thresh_img` (or more commonly simply left as `th`) is the thresholded single-channel image.
+
+#### Kernel
+
+Morphology Transforms first require the selection of a kernel. There are various kernels available. In the case of the arrow, a large cross kernel was used and because of that, you can see that the middles of the arrow have been removed.
+
+Selection of the right kernel and size can be tricky but it is necessary process as each use case is different. Start with a small kernel and then increase the size if the results look promising.
+
+Some example kernels:
+
+```python
+kernel = np.ones((5,5),np.uint8) # Creates a 5x5 kernel of 1s
+kernel = cv2.getStructuringElement(cv2.MORPH_CROSS,(19,19)) # 19x19 cross kernel
+```
+
+Documentation on Kernels [here](https://docs.opencv.org/3.4/d4/dbd/tutorial_filter_2d.html). 
+
+**Warning: Do note that kernels have to be odd-number in size**
+
+#### Inverting an Image
+
+Eroding an image is not the same as inverting an image and then dilating the image. Nor is dilating an image the same as inverting an image and then eroding the image. Due to this, it is prudent to try inverting an image to see if the desired features can be brought out better than the original image.
+
+Inverting an image is relatively simple - just do a bitwise not operation on itself.
+
+```python
+inverted_img = cv2.bitwise_not(raw_img, raw_img)
+```
+
+### Erode and Dilate
+
+The OpenCV functions `.erode()` and `.dilate()` are the simplest of the morphology transforms. These 2 morphological operators are especially useful when trying to create more features in otherwise simple shapes with little lighting changes.
+
+For an illustration, we can use this image of an `i`:
+
+![Original image](https://docs.opencv.org/2.4/_images/Morphology_1_Tutorial_Theory_Original_Image.png)
+
+Applying dilation:
+
+![Dilation result - Theory example](https://docs.opencv.org/2.4/_images/Morphology_1_Tutorial_Theory_Dilation.png)
+
+Inverting the image and applying dilation:
+
+![Left image: original image inverted, right image: resulting dilatation](https://docs.opencv.org/2.4/_images/Morphology_1_Tutorial_Theory_Dilatation_2.png)
+
+Erosion of the original image:
+
+![Erosion result - Theory example](https://docs.opencv.org/2.4/_images/Morphology_1_Tutorial_Theory_Erosion.png)
+
+Inverting the image and applying erosion:
+
+![Left image: original image inverted, right image: resulting erosion](https://docs.opencv.org/2.4/_images/Morphology_1_Tutorial_Theory_Erosion_2.png)
+
+If you'd like to know more about the theory, feel free to head over to the [official docs](https://docs.opencv.org/2.4/doc/tutorials/imgproc/erosion_dilatation/erosion_dilatation.html).
+
+Eroding or Dilating an image is rather simple, simply call `.erode()` with the frame and the kernel:
+
+```python
+eroded_frame = cv2.erode(image, kernel)
+dilated_frame = cv2.dilate(image, kernel)
+```
+
+### Black Hat and Top Hat Transforms
+
+Black Hat and Top Hat are more advanced morphological transforms. In a Black hat transform, the image is dilated and then eroded before being compared to the original image. In a top hat transform the image is eroded and then dilated before being compared to the original image. More detailed information can be found [here](https://docs.opencv.org/2.4/doc/tutorials/imgproc/opening_closing_hats/opening_closing_hats.html).
+
+Instead of talking about the theory, here is a practical example a cross-kernel being used to do a blackhat/tophat transform on an arrow to detect key features:
+
+![1563810074231](../../../Consistently%20Updated/coding-notes/OpenCV-Python/assets/1563810074231.png)
+
+By comparing the eroded features, we can see if 2 of the points are on the left or right of the centroid to determine the direction of the arrow.
+
+Black Hat and Top hat require a kernel and grayscale image as well, however the method to call them is different as they are part of the `.morphologyEx` function.
+
+```python
+tophat = cv2.morphologyEx(raw_img, cv2.MORPH_TOPHAT, kernel) # Top Hat transform
+blackhat = cv2.morphologyEx(raw_img, cv2.MORPH_BLACKHAT, kernel) # Black Hat transform
+```
+
+### Demo Script
+
+For a quick demonstration all these transforms, feel free to find the demo script `morph_transform_demo.py`. 
+
+- `KERNEL`: define the kernel to be used
+- `INVERT`: Sets whether the image should be inverted
+- `THRESH`: Sets whether to obtain a grayscale image via thresholding or by color conversion to grayscale
+
+## Miscellaneous Tricks and Scripts
+
+Some miscellaneous functions and scripts I use.
+
+- Video Cropper
 
 ### Limit Display FPS 
 
