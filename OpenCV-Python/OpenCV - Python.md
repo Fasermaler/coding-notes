@@ -373,8 +373,6 @@ if key == ord('q'):
 	break
 ```
 
-
-
 ## Working with Picamera
 
 The RPi Picamera is unique as it connects directly to the RPi using a ribbon cable. Due too this it requires use of the `picamera` library (to be installed separately) and does not use the `VideoCapture` object.
@@ -523,7 +521,22 @@ if cv2.waitKey(img_ms) & 0xFF == ord('q'):
     break
 ```
 
+### ROI Selection Utility
+
+Within the example code is the `roi_selection_demo.py` script. This script allows the user to select 4 points to form an ROI. In the demo, the points are only printed in the console as output after being 'saved'. But that segment of the code can be modified as necessary.
+
+The main considerations are to allow the user to select ROI beyond the scope of the image so as to allow them to select the shape they really want. Additionally, if the image is too large, it will be scaled down accordingly so that the user can actually see the whole image on a normal monitor without investing in 4K.
+
+The key takeaways are that:
+
+- OpenCV accepts negative coordinates and will compute them properly relative to the origin (top left of the image)
+- Images and coordinates can be scaled up or down with almost no loss in accuracy.
+
+An advanced version of this code was used as part of an ROI selection utility during my internship stint. 
+
 ### Use Odd Shaped ROI
+
+This works in conjunction with the ROI selection utility in the previous section as the user is likely to have selected a weird ROI.
 
 The use case is as follows: 
 
