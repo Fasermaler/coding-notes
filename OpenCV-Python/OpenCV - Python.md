@@ -2,11 +2,9 @@
 
 Author: Fasermaler
 
+This documentation serves to collate various OpenCV concepts I had to self-learn. I have also compiled some of them into easy-to-use template code.
 
-
-This documentation serves to collate various OpenCV concepts I have had to work with into easy-to-use template code.
-
-This will not be a carbon copy of the [OpenCV documentation](https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_tutorials.html) because it would not make sense to lift the official docs when referencing the official docs is faster and more comprehensive. 
+This will not be a carbon copy of the [OpenCV documentation](https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_tutorials.html) because it would not make sense to lift the official docs when referencing the official docs is faster and more comprehensive. Instead, it serves to bridge the holes in understanding and certain approaches I have found to work in the past.
 
 ## Imports
 
