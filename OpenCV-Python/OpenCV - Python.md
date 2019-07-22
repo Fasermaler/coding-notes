@@ -275,18 +275,17 @@ A more concrete example can be found in the `split_four.py` script that can be f
 
 ```python
 def split_into_four(frame):
-		
-		Width, Height = frame.shape[1], frame.shape[0]	
-		crop_h, crop_w = int(Height/2), int(Width/2)
- 		
- 		# Get the 4 cropped frames and put them in an array
-		crop1 = frame[0:crop_h, 0:crop_w]
-		crop2 = frame[0:crop_h, crop_w:Width]
-		crop3 = frame[crop_h:Height, 0:crop_w]
-		crop4 = frame[crop_h:Height, crop_w:Width]
-		crop_array = [crop1, crop2, crop3, crop4]
-
-		return crop_array
+    
+    Width, Height = frame.shape[1], frame.shape[0]	
+    crop_h, crop_w = int(Height/2), int(Width/2)
+    # Get the 4 cropped frames and put them in an array
+    crop1 = frame[0:crop_h, 0:crop_w]
+    crop2 = frame[0:crop_h, crop_w:Width]
+    crop3 = frame[crop_h:Height, 0:crop_w]
+    crop4 = frame[crop_h:Height, crop_w:Width]
+    crop_array = [crop1, crop2, crop3, crop4]
+    
+    return crop_array
 ```
 
 In this example, the image is split into 4 equally sized images. The way this is done is by finding the halfway point of both the height and width of the frame (assigned to `crop_h` and `crop_y`).
