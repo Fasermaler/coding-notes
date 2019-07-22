@@ -278,7 +278,6 @@ A more concrete example can be found in the `split_four.py` script that can be f
 ```python
 def split_into_four(frame):
 		
-
 		Width, Height = frame.shape[1], frame.shape[0]	
 		crop_h, crop_w = int(Height/2), int(Width/2)
  		
@@ -288,7 +287,6 @@ def split_into_four(frame):
 		crop3 = frame[crop_h:Height, 0:crop_w]
 		crop4 = frame[crop_h:Height, crop_w:Width]
 		crop_array = [crop1, crop2, crop3, crop4]
-
 
 		return crop_array
 ```
@@ -561,3 +559,51 @@ else:
     cv2.rectangle(frame, (x, y), ((x + w), (y + h)), (0,0,255),
 ```
 
+### Red Color Thresholding Using RGB
+
+This is a method of color filtering that does not use hue and saturation, instead opting to work directly on the image layers using numpy.
+
+The use case is highly specific and the filtering method itself works extremely well within a controlled condition but is not robust enough to adapt itself to changing lighting or situations. Thus it is not recommended in most cases - it is however, very accurate when placed within the specific set of circumstances it has been calibrated for.
+
+To illustrate the legitimacy of this algorithm, here is an image of a drone flying into a red-lit hoop running on this filtering method:
+
+![1563808324844](assets/1563808324844.png)
+
+To reaffirm, this is a method used when detecting Red (or the other 2 base colors, Blue and Green). It will give a strong signal when used to evaluate base colors but is unlikely to work well with any other colors.
+
+```python
+# Sets the percentage red threshold, below which a pixel will be eliminated from the final result
+PERC_RED_THRESH = 0.3
+
+ret, frame = cap.read()
+
+# Gets the individual color channels
+# The format assumed here is bgr
+b_channel = np.array(frame[:,:,0]).astype('float')
+g_channel = np.array(frame[:,:,1]).astype('float')
+r_channel = np.array(frame[:,:,2]).astype('float')
+
+# Create a base channel where all values are added together
+bgr_channel = np.add((np.add(b_channel, g_channel)), r_channel)
+
+# Take the average of the blue and green channels and subtract it from the red channel
+# This will eliminate white color from the final image
+reduce_white = np.subtract(r_channel,((b_channel + g_channel)/ 2))
+
+# Find the percentage red by dividing the previous channel by 255
+perc_red = np.divide(reduce_white,255)
+
+# Eliminate all pixels that fail to meet the minimum percentage red using numpy conditional array value setting
+perc_red[perc_red < PERC_RED_THRESH] = 0
+
+# Set the values back to within a range of 255 and set the type back to uint8 so that the frame becomes valid for OpenCV processing
+final_image = perc_red * 255
+final_image = np.floor(final_image).astype('uint8')
+
+# Run another round of openCV thresholding as required
+ret, th = cv2.threshold(final_image,10,255,cv2.THRESH_BINARY)
+```
+
+If you would like to try this approach for your use case, feel free to run the script `red_thresholding_demo.py` in the example code. 
+
+**Fair Warning: Much tuning is required to produce good results**
