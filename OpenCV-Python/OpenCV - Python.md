@@ -504,6 +504,180 @@ The following are the scripts available in the sample code/template code folder:
 - `pi_camera_single_frame.py`: Grabs a single pi camera frame and displays it. Can be used to test if the pi camera even works
 - `pi_camera_video.py`: Grabs video output from the pi camera. Has various options for the camera as well as the option to flush the frame buffer. Also allows you to capture the active frame by pressing `c`.
 
+## Drawing Functions
+
+Drawing functions are basically the bread and butter of OpenCV. It allows you to highlight important information for client as well as do debugging. Detailed documentation of the drawing functions is available [here](https://docs.opencv.org/2.4/modules/core/doc/drawing_functions.html).
+
+### Rectangle
+
+Rectangle functions can be used to draw bounding boxes, region of interest, etc.
+
+```python
+# Syntax
+cv2.rectangle(image, pt1, pt2, color, thickness)
+
+# Example
+cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 1)
+```
+
+This draws a rectangle from `x1`, `y1` coordinates to `x2`, `y2` coordinates. The tuple after defines the color of the rectangle in bgr format. The last number refers to the thickness.
+
+### Text
+
+Text can be used to draw all sorts of useful information such as class names, confidence levels or even instructions to the user on how to use the utility.
+
+```python
+# Syntax
+cv2.putText(image, text, pt, font, fontScale, color, thickness)
+
+# Example
+cv2.putText(frame, "hi", (x, y), cv2.FONT_HERSHEY_PLAIN, fontScale=2.0, color=(255, 0, 0), thickness=2)
+
+```
+
+Pretty straightforward syntax-wise. It basically tries to put the text (in this case 'hi') on the frame at the coordinates `x` and `y` with the font `FONT_HERSHEY_PLAIN` with the scale of `2.0`, blue color and the line thickness of 2 pixels.
+
+#### Font Options
+
+There are other font options for OpenCV. Usually the font is declared at the top of the program like so:
+
+```python
+font = cv2.FONT_HERSHEY_PLAIN
+
+cv2.putText(frame, "hi", (x, y), font, fontScale=2.0, color=(255, 0, 0), thickness=2)
+```
+
+Other font options include the following:
+
+- `FONT_HERSHEY_SIMPLEX`
+- `FONT_HERSHEY_PLAIN`
+- `FONT_HERSHEY_DUPLEX`
+- `FONT_HERSHEY_COMPLEX`
+- `FONT_HERSHEY_TRIPLEX`
+- `FONT_HERSHEY_COMPLEX_SMALL`
+- `FONT_HERSHEY_SCRIPT_COMPLEX`
+- `FONT_HERSHEY_SCRIPT_SIMPLEX`
+
+Here is an image preview of what the fonts look like (image from [codeyarns](![Fonts available in OpenCV](https://codeyarns.files.wordpress.com/2015/03/20150311_opencv_fonts.png?w=1100))):
+
+![Fonts available in OpenCV](https://codeyarns.files.wordpress.com/2015/03/20150311_opencv_fonts.png?w=1100)
+
+#### Common Text Locations
+
+It is common to put text in the edges of the image (such as FPS counters). Due to this, the coordinates of the text can be dynamically obtained using the `.shape` attribute. Examples below:
+
+```python
+cv2.putText(frame, fps,  (10, (frame.shape[0] - 20)), cv2.FONT_HERSHEY_PLAIN, fontScale=2.0, color=(0, 0, 255), thickness=2) # fps counter placed relative to the frame's height
+```
+
+Take note that text is drawn with the top left of the text at the specified coordinates, thus the need to subtract 20px from the height of the image.
+
+*Reminder: Origin of the image is in the top left corner of the image*
+
+### Line
+
+Lines are another common entity used in image processing outputs. It can be used to visualize the ROI or even visualize velocities and trends of tracked objects.
+
+```python
+# Syntax
+cv2.line(image, (pt1), (p2), color, thickness)
+
+# Example
+cv2.line(frame, (x1, y1), (x2, y2), (255, 0, 0), 2)
+```
+
+Similar to a rectangle except that it draws a straight line between the 2 points being referenced.
+
+### Circle
+
+Circles are primarily used to draw houghcircles or dots (by drawing a tiny circle). Dots can be used to mark the center of bounding boxes for tracking or other purposes.
+
+```python
+# Syntax
+cv2.circle(image, pt, radius, color, thickness)
+
+# Example
+cv2.circle(frame, (x, y), 5, (255, 0, 0), 2)
+```
+
+### Other Drawing Functions
+
+There are other drawing functions but as they are not as commonly used, they will not be discussed within the scope of this document. Full drawing documentation available [here](https://docs.opencv.org/2.4/modules/core/doc/drawing_functions.html).
+
+## Hough Lines Transform
+
+Hough lines is a line detection method that works as an additional layer after a canny edge filter. This allows straight edges in an image to be detected.
+
+It is a rather expensive algorithm to run and is susceptible to noise, thus the input image has to have a clean signal and not have too many possible lines unless real-time performance is not a requirement.
+
+Full Hough Lines Transform theory and documentation [here](https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_imgproc/py_houghlines/py_houghlines.html).
+
+The following is a Hough Line Transform used to detect a grid and subsequently a lit square in the grid. Notice how the grid can still be properly detected despite it being non-uniform in spacing. This is possible when hough line transform is used instead of template matching.
+
+![1563894456180](assets/1563894456180.png)
+
+### Basic Hough Lines Transform Implementation
+
+```python
+import cv2
+import numpy as np
+
+img = cv2.imread('test.jpg')
+gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY) # convert the image to gray and use a canny edge detector
+edges = cv2.Canny(gray,50,150,apertureSize = 3)
+
+lines = cv2.HoughLines(edges,1,np.pi/180,200)
+for rho,theta in lines[0]:
+    a = np.cos(theta)
+    b = np.sin(theta)
+    x0 = a*rho
+    y0 = b*rho
+    x1 = int(x0 + 1000*(-b))
+    y1 = int(y0 + 1000*(a))
+    x2 = int(x0 - 1000*(-b))
+    y2 = int(y0 - 1000*(a))
+
+    cv2.line(img,(x1,y1),(x2,y2),(0,0,255),2)
+
+cv2.imshow("detected lines", img)
+```
+
+Notice that the Hough Lines detector actually only gives the rho and theta of the lines. This means that it is possible to generate what type of line or even the equation of the lines from the given output. This information will be of use in the arrow detection implementation as outlined in the Miscellaneous section.
+
+## Hough Circles Transform
+
+Like Hough Lines Transform, Hough Circles Transform simply attempts to find circles in the environment. 
+
+Hough Circles Transform can be quite unreliable and susceptible to noise. Additionally it requires the circles to be circular when viewed head on (as is it's output). It is incapable of detecting warped circles or even circles with obscured parts (or parts out of the frame). This means that it can be a rather unreliable algorithm for certain use cases.
+
+See the circumcenter detection section under miscellaneous for a possible algorithm that might fit your use case.
+
+### Simple Demo
+
+This demo is taken from the [OpenCV docs](https://docs.opencv.org/master/da/d53/tutorial_py_houghcircles.html).
+
+```python
+import numpy as np
+import cv2 as cv
+img = cv.imread('test.jpg',0)
+img = cv.medianBlur(img,5)
+cimg = cv.cvtColor(img,cv.COLOR_GRAY2BGR)
+circles = cv.HoughCircles(img,cv.HOUGH_GRADIENT,1,20, param1=50,param2=30,minRadius=0,maxRadius=0)
+circles = np.uint16(np.around(circles))
+for i in circles[0,:]:
+    # draw the outer circle
+    cv.circle(cimg,(i[0],i[1]),i[2],(0,255,0),2)
+    # draw the center of the circle
+    cv.circle(cimg,(i[0],i[1]),2,(0,0,255),3)
+cv.imshow('detected circles',cimg)
+cv.waitKey(0)
+cv.destroyAllWindows()
+```
+
+The result is as seen below:
+
+![houghcircles2.jpg](https://docs.opencv.org/master/houghcircles2.jpg)
+
 ## Morphology Transforms
 
 Morphology transforms are very useful in image processing to bring out certain features or reducing unwanted noise to create a stronger signal.
@@ -799,6 +973,64 @@ else:
     # Draw the box as a red rectangle
     cv2.rectangle(frame, (x, y), ((x + w), (y + h)), (0,0,255),
 ```
+
+### Circle center detection using Circumcenter
+
+This is an alternative algorithm to Hough Circles Transform if you use case is as follows:
+
+- There is only 1 circle to be detected
+- The signal can be isolated such that only parts of the circle are detected and nothing else
+- Parts of the circle may be obscured but the center of the circle still has to be located
+
+This algorithm takes 3 points from what it assumes to be parts of the circle (this is why a clean signal of the circle and nothing but the circle is required). It sorts all possible candidate points and splits the 'circle' into 3 sections - top, middle, bottom and chooses one random point in each section.
+
+Then using the [circumcenter formula](https://www.vedantu.com/formula/circumcenter-formula), it attempts to compute the center of the circle.
+
+The demo implementation can be found in the sample code as `circumcenter_demo.py`. It requires `sympy` to run.
+
+### Arrow Detection with Hough Lines Transform
+
+To determine the direction of an arrow, template matching or other methods could be used. However one approach could see the use of Hough Lines Transform.
+
+```python
+for rho,theta in line:
+        if theta > 0.698 and theta < 1.047:
+            a = np.cos(theta)
+            b = np.sin(theta)
+            x0 = a*rho
+            y0 = b*rho
+
+            x1 = int(x0 + 1000*(-b))
+            y1 = int(y0 + 1000*(a))
+            x2 = int(x0 - 1000*(-b))
+            y2 = int(y0 - 1000*(a))
+
+
+            x_cood = int(-(rY - (rho/b)) / (a/b))
+            print(x_cood,rY)
+        
+            cv2.line(frame,(x1,y1),(x2,y2),(0,255,0),2)
+            cv2.circle(frame, (x_cood, rY), 5, (0,255,255), -1)
+        elif theta > 2.269 and theta < 2.443:
+            a = np.cos(theta)
+            b = np.sin(theta)
+            x0 = a*rho
+            y0 = b*rho
+            x1 = int(x0 + 1000*(-b))
+            y1 = int(y0 + 1000*(a))
+            x2 = int(x0 - 1000*(-b))
+            y2 = int(y0 - 1000*(a))
+            x_cood = int(-(rY - (rho/b)) / (a/b))
+            print(x_cood,rY)
+            cv2.line(frame,(x1,y1),(x2,y2),(0,0,255),2)
+            cv2.circle(frame, (x_cood, rY), 5, (0,255,255), -1)
+```
+
+By checking `rho` and `theta`, the lines forming the arrow head can be categorized. `rY` is the y coordinate of the centroid. the value of `rY` is then substituted into the equation of the line to get the `x_cood` of the point had it followed the line.
+
+By comparing the x coordinate of `rY` on the line and the tru x coordinate of the centroid of the arrow. It is possible to determine if the arrow was pointed to the left or right.
+
+Unfortunately the arrow test script is an unedited full script of a drone flight test script. Feel free to reference it however - I will edit it in the future to isolate a demo snippet if I have the time.
 
 ### Red Color Thresholding Using RGB
 
