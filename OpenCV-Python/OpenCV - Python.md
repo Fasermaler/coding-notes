@@ -374,7 +374,7 @@ if key == ord('q'):
 
 ## Working with Picamera
 
-The RPi Picamera is unique as it connects directly to the RPi using a ribbon cable. Due too this it requires use of the `picamera` library (to be installed separately) and does not use the `VideoCapture` object.
+The RPi Picamera is unique as it connects directly to the RPi using a ribbon cable. Due to this it requires use of the `picamera` library (to be installed separately) and does not use the `VideoCapture` object.
 
 ### Imports
 
