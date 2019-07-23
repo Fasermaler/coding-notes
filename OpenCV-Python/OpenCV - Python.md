@@ -558,7 +558,7 @@ Other font options include the following:
 - `FONT_HERSHEY_SCRIPT_COMPLEX`
 - `FONT_HERSHEY_SCRIPT_SIMPLEX`
 
-Here is an image preview of what the fonts look like (image from [codeyarns](![Fonts available in OpenCV](https://codeyarns.files.wordpress.com/2015/03/20150311_opencv_fonts.png?w=1100))):
+Here is an image preview of what the fonts look like (image from [codeyarns](![Fonts available in OpenCV](https://codeyarns.files.wordpress.com/2015/03/20150311))):
 
 ![Fonts available in OpenCV](https://codeyarns.files.wordpress.com/2015/03/20150311_opencv_fonts.png?w=1100)
 
@@ -986,7 +986,7 @@ This algorithm takes 3 points from what it assumes to be parts of the circle (th
 
 Then using the [circumcenter formula](https://www.vedantu.com/formula/circumcenter-formula), it attempts to compute the center of the circle.
 
-The demo implementation can be found in the sample code as `circumcenter_demo.py`. It requires `sympy` to run.
+The demo implementation can be found in the sample code as `circumcenter_demo.py`. It requires `sympy` to run. It also assumes that you have a grayscale image with a strong signal to detect with.
 
 ### Arrow Detection with Hough Lines Transform
 
