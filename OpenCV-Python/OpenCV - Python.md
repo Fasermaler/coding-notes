@@ -650,6 +650,80 @@ Within the callback function itself, it takes an argument `event` which is the s
 
 The example scripts that use mouse events are the `video_crop.py` and `roi_selection_demo.py` scripts. Both of these use mouse events to allow the user to define a specific region of interest.
 
+## SIFT 
+
+Scale-Invariant Feature Transform (SIFT) is a template matching algorithm. The issue with their implementation is that template matching tend to be expensive and only work well in a specific set of circumstances. 
+
+SIFT utilizes feature recognition to match an object in the image to a template that it has as reference. 
+
+### SIFT in OpenCV 3
+
+One very common issue with example code on the net for SIFT is that they are often outdated for OpenCV 3. Another possibility is that the programmer might find the module nonexistent.
+
+For a start, SIFT and SURF are both under the opencv-contrib library which is separate from OpenCV itself. Be sure to check that the install/build method that is reference actually clones the opencv-contrib repo and references it during the OpenCV build process.
+
+Additionally, the syntax for SIFT and SURF is a bit different in OpenCV 3 as compared to prior versions.
+
+**OpenCV Version < 3:**
+
+```python
+import cv2
+detector = cv2.FeatureDetector_create("SIFT")
+```
+
+**OpenCV Version 3 and up:**
+
+```python
+import cv2
+detector = cv2.xfeatures2d.SIFT_create(1000)
+```
+
+Hopefully if you already know how to use SIFT and SURF, this has resolved the number 1 issue you've had going into this section.
+
+### Using SIFT 
+
+```python
+frame = cv2.imread('test.png', 0) # read the test image in gray
+
+ref_img = cv2.imread('ref.png',0) # read the reference image in gray
+#  Initiate SIFT detector
+sift1 = cv2.xfeatures2d.SIFT_create(1000)
+sift2 = cv2.xfeatures2d.SIFT_create(1000)
+
+# Run feature detection on both images
+kp1, des1 = sift1.detectAndCompute(frame,None)
+kp2, des2 = sift2.detectAndCompute(ref_img,None)
+# FLANN parameters
+FLANN_INDEX_KDTREE = 1
+index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 2)
+search_params = dict(checks=100)   # or pass empty dictionary
+flann = cv2.FlannBasedMatcher(index_params,search_params)
+matches = flann.knnMatch(des1,des2,k=2)
+# Need to draw only good matches, so create a mask
+matchesMask = [[0,0] for i in xrange(len(matches))]
+# ratio test as per Lowe's paper
+matched_f = 0
+for i,(m,n) in enumerate(matches):
+    if m.distance < 0.62*n.distance:
+        matched_f += 1
+        matchesMask[i]=[1,0]
+        draw_params = dict(matchColor = (0,255,0),
+                           singlePointColor = (255,0,0),
+                           matchesMask = matchesMask,
+                           flags = 0)
+final_img = cv2.drawMatchesKnn(img_rec_red2,kp1,img2,kp2,matches,None,**draw_params)
+
+cv2.imshow('image',final_img)
+```
+
+So what was all that? Basically, 2 sift objects were created to find features in both the reference and the actual image. Then the points were compared to see if enough features were similar. The output is then shown.
+
+Of course the theory is more complex but the idea here is to show how it works and provide example code for you to get going.
+
+### When not to use SIFT
+
+Template matching is a pretty powerful tool, but there is a reason why I have left it to one of the last few sections. This is because template matching should not be used as a crutch. It is slow, unreliable and generally gets affected by too much noisy in complex environments. Where possible, you should always aim to use more efficient or generic algorithms instead of template matching - it should be a last resort.
+
 ## Miscellaneous Tricks and Scripts
 
 ### Limit Display FPS 
