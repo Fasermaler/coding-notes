@@ -596,9 +596,7 @@ dilated_frame = cv2.dilate(image, kernel)
 
 Black Hat and Top Hat are more advanced morphological transforms. In a Black hat transform, the image is dilated and then eroded before being compared to the original image. In a top hat transform the image is eroded and then dilated before being compared to the original image. More detailed information can be found [here](https://docs.opencv.org/2.4/doc/tutorials/imgproc/opening_closing_hats/opening_closing_hats.html).
 
-Instead of talking about the theory, here is a practical example a cross-kernel being used to do a blackhat/tophat transform on an arrow to detect key features:
-
-![1563810074231](./assets/1563810074231.png)
+Instead of talking about the theory, here is a practical example a cross-kernel being used to do a blackhat/tophat transform on an arrow to detect key features:![1563810074231](./assets/1563810074231.png)
 
 By comparing the eroded features, we can see if 2 of the points are on the left or right of the centroid to determine the direction of the arrow.
 
@@ -611,17 +609,48 @@ blackhat = cv2.morphologyEx(raw_img, cv2.MORPH_BLACKHAT, kernel) # Black Hat tra
 
 ### Demo Script
 
-For a quick demonstration all these transforms, feel free to find the demo script `morph_transform_demo.py`. 
+It makes no sense to keep talking about the theory when a quick demonstration will allow you to understand how these tools can be used to emphasize features you might need. Thus the demo script should be a good start in trying to find out if any of these morphological transforms are useful for you.
+
+Feel free to find the demo script `morph_transform_demo.py`. The options available are as follows:
 
 - `KERNEL`: define the kernel to be used
 - `INVERT`: Sets whether the image should be inverted
 - `THRESH`: Sets whether to obtain a grayscale image via thresholding or by color conversion to grayscale
 
+## Mouse Events
+
+OpenCV allows for mouse events on an active OpenCV window to do a callback to a specific function. This can be used to allow users to set ROI, select pixels or just add additional functionality.
+
+*As a side note, it's possible to make an entire GUI in OpenCV using rectangles and putText as well as checking mouse click locations - but please don't.*
+
+### Bind Callback Function
+
+To begin, the callback function has to be bound to a specific OpenCV named window. This can be done by defining the name of the named window before hand and setting the mouse callback.
+
+```python
+# Defines some function
+def some_function(event):
+    pass
+
+cv2.namedWindows('test') # Declares a named wwindow called 'test'
+# Attach some_function as a callback for the window 'test'
+cv2.setMouseCallback('test', some_function)
+
+# Actually start the window 'test'
+cv2.imshow('test', frame)
+```
+
+### Mouse Event Detection
+
+Within the callback function itself, it takes an argument `event` which is the specific mouse event passed onto the function when the callback is invoked. the most basic events needed for most functionality is mouse left button down and mouse left button up.
+
+*Note: It is important to check that the mouse button has been raised or else the functionality enclosed within the mouse button down will take place forever.*
+
+### Scripts
+
+The example scripts that use mouse events are the `video_crop.py` and `roi_selection_demo.py` scripts. Both of these use mouse events to allow the user to define a specific region of interest.
+
 ## Miscellaneous Tricks and Scripts
-
-Some miscellaneous functions and scripts I use.
-
-- Video Cropper
 
 ### Limit Display FPS 
 
@@ -634,6 +663,17 @@ img_ms = int(1000 / desired_FPS)
 if cv2.waitKey(img_ms) & 0xFF == ord('q'):
     break
 ```
+
+### Video Cropping Utility
+
+`video_cropper.py` is a script that allows the user to set an ROI and then output a cropped version of the input video.
+
+Simply define the input and output paths for the videos and then launch the utility. 
+
+Use the mouse to select the ROI:
+
+- Press `r` to reset the ROI
+- Press `c` to confirm the ROI an begin the crop process
 
 ### ROI Selection Utility
 
