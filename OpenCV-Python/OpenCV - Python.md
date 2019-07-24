@@ -12,7 +12,7 @@ _______
 
 ## Table of Contents <a name="top"></a> 
 
-1. Imports](#1)<br/>
+1. [Imports](#1)<br/>
    1.1	[Basic Imports](#1.1)</br>
    1.1.1	[cv2](#1.1.1)</br>
    1.1.2	[numpy](#1.1.2)</br>
