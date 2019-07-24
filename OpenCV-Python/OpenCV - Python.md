@@ -14,13 +14,13 @@ _______
 
 1. Imports](#1)<br/>
    1.1	[Basic Imports](#1.1)</br>
-   1.1.1	[cv2](#1.1.1)</br>
-   1.1.2	[numpy](#1.1.2)</br>
+      1.1.1	[cv2](#1.1.1)</br>
+      1.1.2	[numpy](#1.1.2)</br>
    1.2	[Other Useful Imports](#1.2)</br>
-   1.2.1	[glob](#1.2.1)</br>
-   1.2.2	[Pillow](#1.2.2)</br>
-   1.2.3	[imutils](#1.2.3)</br>
-   1.2.4	[Time](#1.2.4)</br>
+      1.2.1	[glob](#1.2.1)</br>
+      1.2.2	[Pillow](#1.2.2)</br>
+      1.2.3	[imutils](#1.2.3)</br>
+      1.2.4	[Time](#1.2.4)</br>
 
 2. [Image I/O](#2)</br>
 
