@@ -14,160 +14,86 @@ _______
 
 1. Imports](#1)<br/>
    1.1	[Basic Imports](#1.1)</br>
-      1.1.1	[cv2](#1.1.1)</br>
-      1.1.2	[numpy](#1.1.2)</br>
+   1.1.1	[cv2](#1.1.1)</br>
+   1.1.2	[numpy](#1.1.2)</br>
    1.2	[Other Useful Imports](#1.2)</br>
-      1.2.1	[glob](#1.2.1)</br>
-      1.2.2	[Pillow](#1.2.2)</br>
-      1.2.3	[imutils](#1.2.3)</br>
-      1.2.4	[Time](#1.2.4)</br>
-
+   1.2.1	[glob](#1.2.1)</br>
+   1.2.2	[Pillow](#1.2.2)</br>
+   1.2.3	[imutils](#1.2.3)</br>
+   1.2.4	[Time](#1.2.4)</br>
 2. [Image I/O](#2)</br>
-
    2.1	[Image Read](#2.1)</br>
-
    2.2	[Image Write](#2.2)</br>
-
    2.3	[Supported Image Extensions](#2.3)</br>
-
 3. [Video I/O](#3)</br>
-
    3.1	[Webcam/USB Connected Camera](#3.1)</br>
-
    3.2	[IP Camera](#3.2)</br>
-
-   ​	3.2.1	[Process](#3.2.1)</br>
-
-   ​	3.2.2	[Troubleshooting Notes](#3.2.2)</br>
-
+   3.2.1	[Process](#3.2.1)</br>
+   3.2.2	[Troubleshooting Notes](#3.2.2)</br>
    3.3	[Full Video Display Script](#3.3)</br>
-
    3.4	[Video Writing](#3.4)</br>
-
 4. [Image Related Functions](#4)</br>
-
    4.1	[Shape](#4.1)</br>
-
    4.2	[Slicing Images](#4.2)</br>
-
 5. [Keystrokes](#5)</br>
-
    5.1	[Close Program](#5.1)</br>
-
    5.2	[Adding Additional User Functionality with Keystrokes](#5.2)</br>
-
-   ​	5.2.1	[Working with Special Keys](#5.2.1)</br>
-
+   5.2.1	[Working with Special Keys](#5.2.1)</br>
 6. [Working with Picamera](#6)</br>
-
    6.1	[Imports](#6.1)</br>
-
    6.2	[Initialization](#6.2)</br>
-
-   ​	6.2.1	[Additional Paramerters](#6.2.1)</br>
-
-   ​		6.2.1.1 [Setting White Balance](#6.2.1.1)</br>
-
+   6.2.1	[Additional Paramerters](#6.2.1)</br>
+   6.2.1.1 [Setting White Balance](#6.2.1.1)</br>
    6.3	[Reading from Pi Camera](#6.3)</br>
-
-   ​	6.3.1	[Video Formats](#6.3.1)</br>
-
-   ​	6.3.2	[Flushing the Frame Buffer](#6.3.2)</br>
-
+   6.3.1	[Video Formats](#6.3.1)</br>
+   6.3.2	[Flushing the Frame Buffer](#6.3.2)</br>
    6.4	[Scripts](#6.4)</br>
-
 7. [Drawing Functions](#7)</br>
-
    7.1	[Rectangle](#7.1)</br>
-
    7.2	[Text](#7.2)</br>
-
-   ​	7.2.1	[Font Options](#7.2.1)</br>
-
-   ​	7.2.2	[Common Text Locations](#7.2.2)</br>
-
+   7.2.1	[Font Options](#7.2.1)</br>
+   7.2.2	[Common Text Locations](#7.2.2)</br>
    7.3	[Line](#7.3)</br>
-
    7.4	[Circle](#7.4)</br>
-
    7.5	[Other Drawing Functions](#7.5)</br>
-
 8. [Hough Lines Transform](#8)</br>
-
    8.1	[Basic Hough Lines Transform Implementation](#8.1)</br>
-
 9. [Hough Circles Transform](#9)</br>
-
    9.1	[Simple Demo](#9.1)</br>
-
 10. [Morphology Transforms](#10)</br>
-
     10.1	[Preparing an Image for Morphology Transforms](#10.1)</br>
-
-    ​	10.1.1	[Convert to Grayscale](#10.1.1)</br>
-
-    ​	10.1.2	[Image Thresholding](#10.1.2)</br>
-
-    ​	10.1.3	[Kernel](#10.1.3)</br>
-
-    ​	10.1.4	[Inverting an Image](#10.1.4)</br>
-
+    10.1.1	[Convert to Grayscale](#10.1.1)</br>
+    10.1.2	[Image Thresholding](#10.1.2)</br>
+    10.1.3	[Kernel](#10.1.3)</br>
+    10.1.4	[Inverting an Image](#10.1.4)</br>
     10.2	[Erode and Dilate](#10.2)</br>
-
     10.3	[Black Hat and Top Hat Transforms](#10.3)</br>
-
     10.4	[Demo Script](#10.4)</br>
-
 11. [Centroid Detection](#11)</br>
-
     11.1	[Contour Detection](#11.1)</br>
-
     11.2	[Centroid Detection of Contours](#11.2)</br>
-
 12. [Mouse Events](#12)</br>
-
     12.1	[Bind Callback Function](#12.1)</br>
-
     12.2	[Mouse Event Detection](#12.2)</br>
-
     12.3	[Scripts](#12.3)</br>
-
 13. [SIFT](#13)</br>
-
     13.1	[SIFT in OpenCV 3](#13.1)</br>
-
     13.2	[Using SIFT](#13.2)</br>
-
     13.3	[When not to use SIFT](#13.3)</br>
-
 14. [Camera Calibration](#14)</br>
-
     14.1	[Checkerboard Calibration](#14.1)</br>
-
     14.2	[Getting the Camera Mtx](14.2)</br>
-
     14.3	[Getting the Optimal Camera Matrix for Undistortion](#14.3)</br>
-
     14.4	[Steps for Demo](#14.4)</br>
-
 15. [Aruco Marker Detection](#15)</br>
-
 16. [Miscellaneous Tricks and Scripts](#misc)</br>
-
     16.1	[Limit Display FPS](#misc.1)</br>
-
     16.2	[Video Cropping Utility](#misc.2)</br>
-
     16.3	[ROI Selection Utility](#misc.3)</br>
-
     16.4	[Use Odd Shaped ROI](#misc.4)</br>
-
     16.5	[Working with Model Bounding Boxes](#misc.5)</br>
-
     16.6	[Circle center detection using Circumcenter](#misc.6)</br>
-
     16.7	[Arrow Detection with Hough Lines Transform](#misc.7)</br>
-
     16.8	[Red Color Thresholding Using RGB](#misc.8)</br>
 
 ## 1 Imports <a name="1"></a>
