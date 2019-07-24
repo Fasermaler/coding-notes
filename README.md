@@ -81,6 +81,21 @@ Additional resources to learn these things and more can be found in [Additional 
   - [Book: Deep Learning with Python](https://www.amazon.com/Deep-Learning-Python-Francois-Chollet/dp/1617294438)
     - This book is literally written by the creator of Keras. It is a (relatively) fast read that goes through Keras functionality through examples as well as explaining Deep Learning concepts from the ground up.
 
+## Useful Repositories
+
+- [rlcode](https://github.com/rlcode)
+  - Lots of repositories on reinforcement learning and DQNs
+  - Plenty of minimal code that can serve as building blocks
+  - This person basically lives, breathes and eats reinforcement learning
+- [TheAlgorithms](https://github.com/TheAlgorithms/)
+  - Lots of implementations for many many different types of algorithms in all languages
+  - A good reference
+- [AtsushiSakai's Python Robotics](https://github.com/AtsushiSakai/PythonRobotics)
+  - Huge repository of Python implementations of well known robotics algorithms
+  - Includes visualizations as well
+
+
+
 ## To-Do
 
 One day, I'll get around to doing these.
