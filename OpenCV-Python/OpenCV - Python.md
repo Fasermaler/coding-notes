@@ -935,6 +935,52 @@ Of course the theory is more complex but the idea here is to show how it works a
 
 Template matching is a pretty powerful tool, but there is a reason why I have left it to one of the last few sections. This is because template matching should not be used as a crutch. It is slow, unreliable and generally gets affected by too much noisy in complex environments. Where possible, you should always aim to use more efficient or generic algorithms instead of template matching - it should be a last resort.
 
+## Camera Calibration
+
+At times, the use case will call for a fish-eye camera or even simply a lens that has an FOV beyond 80 degrees - causing a slightly distortion effect. While this should not affect the more robust or general algorithms, it can cause issues with tracking or detection models that are more sensitive to object size, shape and the like. Especially when it comes to extreme fish-eye lenses where the same object can appear to warp and stretch differently at different parts of the image.
+
+To circumvent this, it is possible to actually map each pixel in the image to another location such that image becomes undistorted. This would obviously result in the edges of the image to have all sorts of artifacts but for the most part the corrected image will be able to be used for image processing purposes.
+
+To obtain the this "map" or more correctly known as a camera calibration matrix, the camera has to be calibrated using a grid of black and white (checkerboard pattern). This is because the spacing and "groundtruth" of a checkerboard pattern can be easily created in OpenCV (to the point that there is a function to generate this groundtruth). By comparing the groundtruth and the actual checkerboard pattern detected in the image, the camera calibration matrix can be generated.
+
+### Checkerboard Calibration
+
+The checkerboard calibration involves taking many images of the checkerboard at various locations within the frame. The images are then globbed and converted to grayscale before `.findChessboardCorners` is invoked to find the checkerboard corners.
+
+```python
+ret, corners = cv.findChessboardCorners(gray, (7,6), None)
+```
+
+In this case `(7,9)` means that the checkerboard is 7x9 in size.
+
+### Getting the camera `mtx`
+
+The camera `mtx` is then obtained by using the corners from all detected checkerboards:
+
+```python
+ret, mtx, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
+```
+
+`mtx` in this case refers to the camera calibration matrix.
+
+### Getting the Optimal Camera Matrix for Undistortion
+
+With the `mtx` and `dist` matrices, the optimal camera matrix can be generated and invoked by `.undistort` to yield the undistorted image.
+
+```python
+newcameramtx, roi = cv2.getOptimalNewCameraMatrix(mtx, dist, (width,height), 1, (width,height))
+undistort = cv2.undistort(frame, mtx, dist, None, newcameramtx)
+```
+
+### Steps for Demo
+
+2 demo scripts are available for trying out the OpenCV undistort functionality.
+
+1. Print out the checkerboard pattern from [mrpt.org](https://www.mrpt.org/downloads/camera-calibration-checker-board_9x7.pdf) or whichever checkerboard pattern desired
+2. Use an image capture script to capture images of the checkerboard pattern at different locations in the frame but perpendicular to the camera lens (capture at least 30 images)
+3. Save these images within a folder and then run `checkerboard_calib.py`. The `ret, mtx, dist, rvecs, tvecs` will be printed in the console. These value will be important
+4. Enter the values into the `camera_undistort_demo.py` and run the script
+
 ## Miscellaneous Tricks and Scripts
 
 ### Limit Display FPS 
