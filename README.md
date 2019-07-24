@@ -22,6 +22,19 @@ Additional resources to learn these things and more can be found in [Additional 
   - Firebase-admin SDK Documentation
   - Blob Documentation
   - [Retrieve](https://github.com/Fasermaler/coding-notes/blob/master/Firebase/retrieve_test.py) and [Upload](https://github.com/Fasermaler/coding-notes/blob/master/Firebase/upload_test.py) test codes
+- [OpenCV - Python](https://github.com/Fasermaler/coding-notes/blob/master/OpenCV-Python/OpenCV%20-%20Python.md)
+  - Imports, Basic I/O, Slicing
+  - PiCamera and IP Cameras
+  - Drawing Functions
+  - Hough Line / Hough Circle
+  - Morphological Transforms
+  - Centroid / Contours
+  - Mouse Events
+  - SIFT
+  - Camera Calibration
+  - Aruco
+  - and a whole bunch of tips and tricks
+  - Plenty of [example code](https://github.com/Fasermaler/coding-notes/tree/master/OpenCV-Python/sample_code) as well! 
 - [Pwntools](https://github.com/Fasermaler/coding-notes/blob/master/Pwntools/pwntools.md)
   - Tubes
   - GDB
@@ -58,6 +71,12 @@ Additional resources to learn these things and more can be found in [Additional 
     - Learn python the hard way is an excellent book that puts the reader through a myriad of exercises to learn and write python code properly, instilling good coding practices early.
   - [Website: Codecademy Python](https://www.codecademy.com/learn/learn-python)
     - Usually the go-to course for anyone trying to pick up python for the first time. It allows you to get right into the basics in your browser - no frills.
+
+- OpenCV - Python
+  - [pyimagesearch](https://www.pyimagesearch.com/)
+    - Great all around reference with plenty of example code and use cases
+    - Has an email openCV course that is actually not garbage
+
 - Keras
   - [Book: Deep Learning with Python](https://www.amazon.com/Deep-Learning-Python-Francois-Chollet/dp/1617294438)
     - This book is literally written by the creator of Keras. It is a (relatively) fast read that goes through Keras functionality through examples as well as explaining Deep Learning concepts from the ground up.
