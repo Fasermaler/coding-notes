@@ -981,6 +981,30 @@ undistort = cv2.undistort(frame, mtx, dist, None, newcameramtx)
 3. Save these images within a folder and then run `checkerboard_calib.py`. The `ret, mtx, dist, rvecs, tvecs` will be printed in the console. These value will be important
 4. Enter the values into the `camera_undistort_demo.py` and run the script
 
+## Aruco Marker Detection
+
+Aruco markers are little markers that look like QR codes. They are very robust and thus where possible, they can be used as the preferred method of object detection or even localization (it is possible to estimate pose from Aruco markers).
+
+First the OpenCV aruco dictionary is initialized based on aruco size.
+
+You can generate aruco markers of appropriate sizes at http://chev.me/arucogen/.
+
+```python
+import cv2.aruco as aruco
+
+aruco_dict = aruco.Dictionary_get(aruco.DICT_4X4_250) # initializing a dictionary for 4x4 aruco markers
+```
+
+Then the image is converted to gray and the detection subroutine is called.
+
+```python
+parameters = aruco.DetectorParameters_create()
+
+corners, ids, rejectedImgPoints = aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
+```
+
+The `aruco_detector.py` script is available and implemented as a class to allow easy import and integration into other code. Run it as a standalone script with a local file named `test.jpg` to test the code.
+
 ## Miscellaneous Tricks and Scripts
 
 ### Limit Display FPS 
