@@ -8,6 +8,8 @@ This will not be a carbon copy of the [OpenCV documentation](https://docs.opencv
 
 I will also attempt to supplement the content with real problems and solutions I have worked on in the past where possible.
 
+_______
+
 ## Table of Contents <a name="top"></a> 
 
 1. [Imports](#1)<br/>
