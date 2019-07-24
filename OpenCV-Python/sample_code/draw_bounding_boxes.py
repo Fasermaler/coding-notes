@@ -13,46 +13,31 @@
 # ╚═╝     ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝
 
 # For maintenance or enquiries, contact me at: https://github.com/fasermaler
+# This script contains 2 functions for drawing bounding boxes on frames based on the output of a model
+# Convention 0 refers to [x, y, w, h] convention
+# Convention 1 refers to [x1, y1, x2, y2] convention
 
-# IP Camera test viewer
-# Change the connection URL to the correct URL and go ahead to test your IP camera!
-
-
-import numpy as np
 import cv2
-import time
 
 
-# ================= PUT CONNECTION URL HERE ====================
-CONNECTION_URL = 'rtsp://admin:12345@192.168.0.11:554/MediaInput/h264'
-# ==============================================================
-
-cap = cv2.VideoCapture(CONNECTION_URL)
-
-
-
-count = 0
-while(True):
+def draw_boxes_conv0(frame, boundingboxlist):
 	
-	ret, frame = cap.read()
+	for box in boundingboxlist:
+		x = box[0]
+		y = box[1]
+		w = box[2]
+		h = box[3]
+		cv2.rectangle(frame, (x, y), (int(x + w), int(y + h)), (0,0,255), 3)
 	
-	try:
-		cv2.imshow('frame', frame)
+	return frame
 
-	except Exception as e:
-		print(e)
-
-		# Check if connection failed for 10s before closing
-		if count > 10:
-			break
-		else:
-			count+= 1
-			time.sleep(1)
-			print(count)
-
-	if cv2.waitKey(1) & 0xFF == ord('q'):
-		break
-
-cap.release()
-cv2.destroyAllWindows()
-
+def draw_boxes_conv1(frame, boundingboxlist):
+	
+	for box in boundingboxlist:
+		x1 = box[0]
+		y1 = box[1]
+		x2 = box[2]
+		y2 = box[3]
+		cv2.rectangle(frame, (x1, y1), (x2, y2), (0,0,255), 3)
+	
+	return frame

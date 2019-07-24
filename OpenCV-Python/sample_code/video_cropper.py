@@ -62,6 +62,7 @@ clone = frame.copy()
 cv2.namedWindow('select ROI')
 cv2.setMouseCallback('select ROI', click_and_crop)
 
+
 while True:
 	cv2.imshow('select ROI', frame)
 	key = cv2.waitKey(1) & 0xFF

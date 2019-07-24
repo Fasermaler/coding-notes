@@ -791,6 +791,43 @@ Feel free to find the demo script `morph_transform_demo.py`. The options availab
 - `INVERT`: Sets whether the image should be inverted
 - `THRESH`: Sets whether to obtain a grayscale image via thresholding or by color conversion to grayscale
 
+## Centroid Detection
+
+Centroid detection is a method to find the "center of mass" of a detected blob. This can be useful when trying to determine the center of a uniform object or used to track the position or velocity of an object that does not have a fixed form (relative to the camera or otherwise).
+
+### Contour Detection
+
+Centroid detection starts with Contour detection:
+
+```python
+img2, contours, hierarchy = cv2.findContours(img,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+```
+
+The most important return of interest are the contours found in `contour`
+
+### Centroid Detection of the Contours
+
+It is then possible to iterate through each contour and find the centroid. It is also possible to filter the contours such that only the largest contour is processed.
+
+```python
+for c in contours:
+    if cv2.contourArea(c) > minimumArea:
+        # calculate moments for each contour
+        M = cv2.moments(c)
+        cX = int(M["m10"] / M["m00"])
+        cY = int(M["m01"] / M["m00"])
+        cv2.circle(frame, (cX, cY), 5, (255, 100, 255), -1)
+        cv2.putText(frame, "centroid", (cX - 25, cY - 25),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+        cv2.drawContours(frame, [c], -1, (255, 100, 255), 2)
+        x,y,w,h = cv2.boundingRect(c)
+        cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
+        rX = int(x+(w/2))
+        rY = int(y+(h/2))
+        cv2.circle(frame, (rX, rY), 5, (0,255,255), -1)
+```
+
+In the example, a rectangle was used to enclosed the contour. However a circle could be used if the objects within the use case are spherical in nature.
+
 ## Mouse Events
 
 OpenCV allows for mouse events on an active OpenCV window to do a callback to a specific function. This can be used to allow users to set ROI, select pixels or just add additional functionality.
@@ -973,6 +1010,19 @@ else:
     # Draw the box as a red rectangle
     cv2.rectangle(frame, (x, y), ((x + w), (y + h)), (0,0,255),
 ```
+
+### Working with Model Bounding Boxes
+
+When working if Neural Network models and the like, the output is usually a list of bounding boxes. Generally, the bounding boxes can be of 2 types of formats:
+
+- `[x, y, w, h]`
+- `[x1, y1, x2, y2]`
+
+By my own conventions, I refer to them as convention `0` and convention `1` respectively.
+
+To allow swapping of models within the code, it would be good to take into account the 2 possible conventions.
+
+Functions to draw bounding boxes for both types of conventions can be found in `draw_bounding_boxes.py`.
 
 ### Circle center detection using Circumcenter
 
