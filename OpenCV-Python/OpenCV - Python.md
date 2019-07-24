@@ -61,40 +61,42 @@ _______
 9. [Hough Circles Transform](#9)</br>
    9.1	[Simple Demo](#9.1)</br>
 10. [Morphology Transforms](#10)</br>
-    10.1	[Preparing an Image for Morphology Transforms](#10.1)</br>
-    10.1.1	[Convert to Grayscale](#10.1.1)</br>
-    10.1.2	[Image Thresholding](#10.1.2)</br>
-    10.1.3	[Kernel](#10.1.3)</br>
-    10.1.4	[Inverting an Image](#10.1.4)</br>
-    10.2	[Erode and Dilate](#10.2)</br>
-    10.3	[Black Hat and Top Hat Transforms](#10.3)</br>
-    10.4	[Demo Script](#10.4)</br>
+   10.1	[Preparing an Image for Morphology Transforms](#10.1)</br>
+   10.1.1	[Convert to Grayscale](#10.1.1)</br>
+   10.1.2	[Image Thresholding](#10.1.2)</br>
+   10.1.3	[Kernel](#10.1.3)</br>
+   10.1.4	[Inverting an Image](#10.1.4)</br>
+   10.2	[Erode and Dilate](#10.2)</br>
+   10.3	[Black Hat and Top Hat Transforms](#10.3)</br>
+   10.4	[Demo Script](#10.4)</br>
 11. [Centroid Detection](#11)</br>
-    11.1	[Contour Detection](#11.1)</br>
-    11.2	[Centroid Detection of Contours](#11.2)</br>
+   11.1	[Contour Detection](#11.1)</br>
+   11.2	[Centroid Detection of Contours](#11.2)</br>
 12. [Mouse Events](#12)</br>
-    12.1	[Bind Callback Function](#12.1)</br>
-    12.2	[Mouse Event Detection](#12.2)</br>
-    12.3	[Scripts](#12.3)</br>
+   12.1	[Bind Callback Function](#12.1)</br>
+   12.2	[Mouse Event Detection](#12.2)</br>
+   12.3	[Scripts](#12.3)</br>
 13. [SIFT](#13)</br>
-    13.1	[SIFT in OpenCV 3](#13.1)</br>
-    13.2	[Using SIFT](#13.2)</br>
-    13.3	[When not to use SIFT](#13.3)</br>
+   13.1	[SIFT in OpenCV 3](#13.1)</br>
+   13.2	[Using SIFT](#13.2)</br>
+   13.3	[When not to use SIFT](#13.3)</br>
 14. [Camera Calibration](#14)</br>
-    14.1	[Checkerboard Calibration](#14.1)</br>
-    14.2	[Getting the Camera Mtx](14.2)</br>
-    14.3	[Getting the Optimal Camera Matrix for Undistortion](#14.3)</br>
-    14.4	[Steps for Demo](#14.4)</br>
+   14.1	[Checkerboard Calibration](#14.1)</br>
+   14.2	[Getting the Camera Mtx](14.2)</br>
+   14.3	[Getting the Optimal Camera Matrix for Undistortion](#14.3)</br>
+   14.4	[Steps for Demo](#14.4)</br>
 15. [Aruco Marker Detection](#15)</br>
 16. [Miscellaneous Tricks and Scripts](#misc)</br>
-    16.1	[Limit Display FPS](#misc.1)</br>
-    16.2	[Video Cropping Utility](#misc.2)</br>
-    16.3	[ROI Selection Utility](#misc.3)</br>
-    16.4	[Use Odd Shaped ROI](#misc.4)</br>
-    16.5	[Working with Model Bounding Boxes](#misc.5)</br>
-    16.6	[Circle center detection using Circumcenter](#misc.6)</br>
-    16.7	[Arrow Detection with Hough Lines Transform](#misc.7)</br>
-    16.8	[Red Color Thresholding Using RGB](#misc.8)</br>
+   16.1	[Limit Display FPS](#misc.1)</br>
+   16.2	[Video Cropping Utility](#misc.2)</br>
+   16.3	[ROI Selection Utility](#misc.3)</br>
+   16.4	[Use Odd Shaped ROI](#misc.4)</br>
+   16.5	[Working with Model Bounding Boxes](#misc.5)</br>
+   16.6	[Circle center detection using Circumcenter](#misc.6)</br>
+   16.7	[Arrow Detection with Hough Lines Transform](#misc.7)</br>
+   16.8	[Red Color Thresholding Using RGB](#misc.8)</br>
+   16.9	[OpenCV 4 Build Instructions](#misc.9)</br>
+   16.10	[Optimized OpenCV Build Instructions for Raspberry Pi](#misc.10)</br>
 
 ## 1 Imports <a name="1"></a>
 
@@ -1454,3 +1456,220 @@ ret, th = cv2.threshold(final_image,10,255,cv2.THRESH_BINARY)
 If you would like to try this approach for your use case, feel free to run the script `red_thresholding_demo.py` in the example code. 
 
 **Fair Warning: Much tuning is required to produce good results**
+
+### 16.9 OpenCV 4 Build Instructions <a name="misc.9"></a>
+
+The following instructions are from [pyimagesearch](https://www.pyimagesearch.com/2018/08/15/how-to-install-opencv-4-on-ubuntu/) and works for Ubuntu 16.04 and 18.04.
+
+1. Update and upgrade all existing packages
+
+   ```shell
+   $ sudo apt-get update
+   $ sudo apt-get upgrade
+   ```
+
+2. Install cmake developer tools
+
+   ```shell
+   sudo apt-get install build-essential cmake unzip pkg-config
+   ```
+
+3. Install video and image dependencies
+
+   ```shell
+   $ sudo apt-get install libjpeg-dev libpng-dev libtiff-dev
+   $ sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
+   $ sudo apt-get install libxvidcore-dev libx264-dev
+   ```
+
+4. Install gtk for GUI backend
+
+   ```shell
+   $ sudo apt-get install libgtk-3-dev
+   ```
+
+5. Install atlas and gfortran for mathematical optimizations
+
+   ```shell
+   $ sudo apt-get install libatlas-base-dev gfortran
+   ```
+
+6. Install python 3 development headers
+
+   ```shell
+   $ sudo apt-get install python3-dev
+   ```
+
+7. Download OpenCV 4 to the home directory
+
+   ```shell
+   $ cd ~
+   $ wget -O opencv.zip https://github.com/opencv/opencv/archive/4.0.0.zip
+   $ wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.0.0.zip
+   ```
+
+8. Unzip the archives
+
+   ```shell
+   $ unzip opencv.zip
+   $ unzip opencv_contrib.zip
+   ```
+
+9. Install `numpy`
+
+   ```shell
+   $ pip install numpy
+   ```
+
+10. Create a build folder
+
+    ```shell
+    $ cd ~/opencv
+    $ mkdir build
+    $ cd build
+    ```
+
+11. Run CMake 
+
+    ```shell
+    $ cmake -D CMAKE_BUILD_TYPE=RELEASE \
+    	-D CMAKE_INSTALL_PREFIX=/usr/local \
+    	-D INSTALL_PYTHON_EXAMPLES=ON \
+    	-D INSTALL_C_EXAMPLES=OFF \
+    	-D OPENCV_ENABLE_NONFREE=ON \
+    	-D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
+    	-D PYTHON_EXECUTABLE=~/.virtualenvs/cv/bin/python \
+    	-D BUILD_EXAMPLES=ON ..
+    ```
+
+12. Compile OpenCV
+
+    ```shell
+    $ make 
+    ```
+
+    *You can run `make -j4` to use multiple cores to make faster but I tend to just wait it out because it is less error prone to compile with no `j` flag. Especially on low-end devices.*
+
+13. Install OpenCV
+
+    ```shell
+    $ sudo make install
+    $ sudo ldconfig
+    ```
+
+It is also possible to install OpenCV in a virtual environment but I tend not to do that as most of my devices are locked down into a specific use case. Thus it is not necessary for me to use a virtual environment.
+
+### 16.10 Optimized OpenCV Build Instructions for Raspberry Pi <a name="misc.10"></a>
+
+The following are instructions to build an optimized version of OpenCV on Raspberyy Pi to get a few more frames out of your algorithms. Instructions taken from [pyimagesearch](https://www.pyimagesearch.com/2017/10/09/optimizing-opencv-on-the-raspberry-pi/).
+
+1. Expand your filesystem if needed. This can be done by running:
+
+   ```shell
+   $ sudo raspi-config
+   ```
+
+   Reboot your system afterwards to ensure the changes take effect.
+
+2. Get more space by removing unnecessary pre-packaged software
+
+   ```shell
+   $ sudo apt-get purge wolfram-engine
+   $ sudo apt-get purge libreoffice*
+   $ sudo apt-get clean
+   $ sudo apt-get autoremove
+   ```
+
+3. Install all the dependencies required for the optimizations:
+
+   ```shell
+   $ sudo apt-get update && sudo apt-get upgrade
+   $ sudo apt-get install build-essential cmake pkg-config
+   $ sudo apt-get install libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev
+   $ sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev
+   $ sudo apt-get install libxvidcore-dev libx264-dev
+   $ sudo apt-get install libgtk2.0-dev libgtk-3-dev
+   $ sudo apt-get install libcanberra-gtk*
+   $ sudo apt-get install libatlas-base-dev gfortran
+   $ sudo apt-get install python2.7-dev python3-dev
+   ```
+
+4. Download OpenCV source (in this example OpenCV 3.3.0 is used but any version should work):
+
+   ```shell
+   $ cd ~
+   $ wget -O opencv.zip https://github.com/opencv/opencv/archive/3.3.0.zip
+   $ unzip opencv.zip
+   $ wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/3.3.0.zip
+   $ unzip opencv_contrib.zip
+   ```
+
+5. Install numpy:
+
+   ```shell
+   $ pip install numpy
+   ```
+
+6. Create a build directory and CMake OpenCV:
+
+   ```shell
+   $ cd ~/opencv-3.3.0/
+   $ mkdir build
+   $ cd build
+   $ cmake -D CMAKE_BUILD_TYPE=RELEASE \
+       -D CMAKE_INSTALL_PREFIX=/usr/local \
+       -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib-3.3.0/modules \
+       -D ENABLE_NEON=ON \
+       -D ENABLE_VFPV3=ON \
+       -D BUILD_TESTS=OFF \
+       -D INSTALL_PYTHON_EXAMPLES=OFF \
+       -D BUILD_EXAMPLES=OFF ..
+   ```
+
+7. Increase the swap size by opening `/etc/dphys-swapfile`. This can be done using nano or vi:
+
+   ```shell
+   $ sudo nano /etc/dphys-swapfile # nano
+   $ sudo vi /etc/dphys-swapfile # vi
+   ```
+
+   Then modify the `CONF_SWAPSIZE` variable:
+
+   ```shell
+   # set size to absolute value, leaving empty (default) then uses computed value
+   #   you most likely don't want this, unless you have an special disk situation
+   # CONF_SWAPSIZE=100
+   CONF_SWAPSIZE=1024
+   ```
+
+   Exit the file and saving:
+
+   - Nano: `ctrl`+`o`, `ctrl`+`x`
+   - Vi: `Esc` then type: `:wq`
+
+8. Restart the swap service:
+
+   ```shell 
+   $ sudo /etc/init.d/dphys-swapfile stop
+   $ sudo /etc/init.d/dphys-swapfile start
+   ```
+
+9. Make OpenCV
+
+   ```shell
+   $ make
+   ```
+
+   *You can run `make -j4` to use multiple cores to make faster but I tend to just wait it out because it is less error prone to compile with no `j` flag. Especially on low-end devices.*
+
+10. Install OpenCV
+
+    ```shell
+    $ sudo make install
+    $ sudo ldconfig
+    ```
+
+11. Repeat steps 7 and 8 but set `CONF_SWAPSIZE` back to 100mb.
+
+
+
