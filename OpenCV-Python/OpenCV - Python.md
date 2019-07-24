@@ -8,13 +8,187 @@ This will not be a carbon copy of the [OpenCV documentation](https://docs.opencv
 
 I will also attempt to supplement the content with real problems and solutions I have worked on in the past where possible.
 
-## Imports
+## Table of Contents <a name="top"></a> 
 
-### Basic Imports
+1. [Imports](#1)<br/>
+
+   1.1	[Basic Imports](#1.1)</br>
+
+   ​	1.1.1	[cv2](#1.1.1)</br>
+
+   ​	1.1.2	[numpy](#1.1.2)</br>
+
+   1.2	[Other Useful Imports](#1.2)</br>
+
+   ​	1.2.1	[glob](#1.2.1)</br>
+
+   ​	1.2.2	[Pillow](#1.2.2)</br>
+
+   ​	1.2.3	[imutils](#1.2.3)</br>
+
+   ​	1.2.4	[Time](#1.2.4)</br>
+
+2. [Image I/O](#2)</br>
+
+   2.1	[Image Read](#2.1)</br>
+
+   2.2	[Image Write](#2.2)</br>
+
+   2.3	[Supported Image Extensions](#2.3)</br>
+
+3. [Video I/O](#3)</br>
+
+   3.1	[Webcam/USB Connected Camera](#3.1)</br>
+
+   3.2	[IP Camera](#3.2)</br>
+
+   ​	3.2.1	[Process](#3.2.1)</br>
+
+   ​	3.2.2	[Troubleshooting Notes](#3.2.2)</br>
+
+   3.3	[Full Video Display Script](#3.3)</br>
+
+   3.4	[Video Writing](#3.4)</br>
+
+4. [Image Related Functions](#4)</br>
+
+   4.1	[Shape](#4.1)</br>
+
+   4.2	[Slicing Images](#4.2)</br>
+
+5. [Keystrokes](#5)</br>
+
+   5.1	[Close Program](#5.1)</br>
+
+   5.2	[Adding Additional User Functionality with Keystrokes](#5.2)</br>
+
+   ​	5.2.1	[Working with Special Keys](#5.2.1)</br>
+
+6. [Working with Picamera](#6)</br>
+
+   6.1	[Imports](#6.1)</br>
+
+   6.2	[Initialization](#6.2)</br>
+
+   ​	6.2.1	[Additional Paramerters](#6.2.1)</br>
+
+   ​		6.2.1.1 [Setting White Balance](#6.2.1.1)</br>
+
+   6.3	[Reading from Pi Camera](#6.3)</br>
+
+   ​	6.3.1	[Video Formats](#6.3.1)</br>
+
+   ​	6.3.2	[Flushing the Frame Buffer](#6.3.2)</br>
+
+   6.4	[Scripts](#6.4)</br>
+
+7. [Drawing Functions](#7)</br>
+
+   7.1	[Rectangle](#7.1)</br>
+
+   7.2	[Text](#7.2)</br>
+
+   ​	7.2.1	[Font Options](#7.2.1)</br>
+
+   ​	7.2.2	[Common Text Locations](#7.2.2)</br>
+
+   7.3	[Line](#7.3)</br>
+
+   7.4	[Circle](#7.4)</br>
+
+   7.5	[Other Drawing Functions](#7.5)</br>
+
+8. [Hough Lines Transform](#8)</br>
+
+   8.1	[Basic Hough Lines Transform Implementation](#8.1)</br>
+
+9. [Hough Circles Transform](#9)</br>
+
+   9.1	[Simple Demo](#9.1)</br>
+
+10. [Morphology Transforms](#10)</br>
+
+    10.1	[Preparing an Image for Morphology Transforms](#10.1)</br>
+
+    ​	10.1.1	[Convert to Grayscale](#10.1.1)</br>
+
+    ​	10.1.2	[Image Thresholding](#10.1.2)</br>
+
+    ​	10.1.3	[Kernel](#10.1.3)</br>
+
+    ​	10.1.4	[Inverting an Image](#10.1.4)</br>
+
+    10.2	[Erode and Dilate](#10.2)</br>
+
+    10.3	[Black Hat and Top Hat Transforms](#10.3)</br>
+
+    10.4	[Demo Script](#10.4)</br>
+
+11. [Centroid Detection](#11)</br>
+
+    11.1	[Contour Detection](#11.1)</br>
+
+    11.2	[Centroid Detection of Contours](#11.2)</br>
+
+12. [Mouse Events](#12)</br>
+
+    12.1	[Bind Callback Function](#12.1)</br>
+
+    12.2	[Mouse Event Detection](#12.2)</br>
+
+    12.3	[Scripts](#12.3)</br>
+
+13. [SIFT](#13)</br>
+
+    13.1	[SIFT in OpenCV 3](#13.1)</br>
+
+    13.2	[Using SIFT](#13.2)</br>
+
+    13.3	[When not to use SIFT](#13.3)</br>
+
+14. [Camera Calibration](#14)</br>
+
+    14.1	[Checkerboard Calibration](#14.1)</br>
+
+    14.2	[Getting the Camera Mtx](14.2)</br>
+
+    14.3	[Getting the Optimal Camera Matrix for Undistortion](#14.3)</br>
+
+    14.4	[Steps for Demo](#14.4)</br>
+
+15. [Aruco Marker Detection](#15)</br>
+
+16. [Miscellaneous Tricks and Scripts](#misc)</br>
+
+    16.1	[Limit Display FPS](#misc.1)</br>
+
+    16.2	[Video Cropping Utility](#misc.2)</br>
+
+    16.3	[ROI Selection Utility](#misc.3)</br>
+
+    16.4	[Use Odd Shaped ROI](#misc.4)</br>
+
+    16.5	[Working with Model Bounding Boxes](#misc.5)</br>
+
+    16.6	[Circle center detection using Circumcenter](#misc.6)</br>
+
+    16.7	[Arrow Detection with Hough Lines Transform](#misc.7)</br>
+
+    16.8	[Red Color Thresholding Using RGB](#misc.8)</br>
+
+## 1 Imports <a name="1"></a>
+
+[go to top](#top)
+
+### 1.1 Basic Imports <a name="1.1"></a>
+
+[go to top](#top)
 
 Basic imports needed for OpenCV to even work.
 
-#### cv2
+#### 1.1.1 cv2 <a name="1.1.1"></a>
+
+[go to top](#top)
 
 ```python
 import cv2
@@ -26,7 +200,9 @@ Imports OpenCV. On older code, you might have to import it as `cv` instead and e
 import cv2 as cv
 ```
 
-#### numpy
+#### 1.1.2 numpy <a name="1.1.2"></a>
+
+[go to top](#top)
 
 ```python
 import numpy as np
@@ -34,11 +210,15 @@ import numpy as np
 
 `np` is simply the convention for most example code. If the code does not explicitly require `numpy`, this import statement can be omitted without significant issues.
 
-### Other Useful Imports
+### 1.2 Other Useful Imports <a name="1.2"></a>
+
+[go to top](#top)
 
 Here are some other additional imports that could be useful. Do note that these will have to be installed in the virtual environment or just `pip` installed depending on the circumstance.
 
-#### glob
+#### 1.2.1 glob <a name="1.2.1"></a>
+
+[go to top](#top)
 
 ```python
 import glob
@@ -46,7 +226,9 @@ import glob
 
 `glob` is a very useful in-built python library when trying to process multiple images or videos. It allows the program to list files within a directory (even by extension), which then allows the program to `cv2.imread` the files sequentially for processing. Glob documentation can be found: [here](https://docs.python.org/3/library/glob.html).
 
-#### Pillow
+#### 1.2.2 Pillow <a name="1.2.2"></a>
+
+[go to top](#top)
 
 ```python
 import PIL
@@ -60,7 +242,9 @@ import PIL as Image
 
 `PIL` or the `Pillow` library is a powerful image processing python library that adds additional tools to the script in modifying images. These include resizing, rotation, histograms, automatic contrast enhancements and more. Full documentation: [here](https://pillow.readthedocs.io/en/stable/handbook/overview.html).
 
-#### imutils
+#### 1.2.3 imutils <a name="1.2.3"></a>
+
+[go to top](#top)
 
 ```python
 import imutils
@@ -68,7 +252,9 @@ import imutils
 
 `imutils` or `image utilities` is a convenience library that contains various functions such as skeletonization, translation, fps counter and etc. It's most important use is when referring to sample code by [pyimagesearch](https://www.pyimagesearch.com/) as their code sees judicious use of the `imutils` library. Documentation for `imutils` can be found: [here](https://github.com/jrosebr1/imutils).
 
-#### Time
+#### 1.2.4 Time <a name="1.2.4"></a>
+
+[go to top](#top)
 
 ```python
 import time
@@ -78,9 +264,13 @@ import time
 
 *Tip: If the script requires an FPS counter, you can simply use `imutils` instead of making one on your own using the `time` library. It will help you to save... time.*
 
-## Image I/O
+## 2 Image I/O <a name="2"></a>
 
-### Image Read
+[go to top](#top)
+
+### 2.1 Image Read <a name="2.1"></a>
+
+[go to top](#top)
 
 Basic image read function.
 
@@ -97,7 +287,9 @@ image = cv2.imread('/path/to/image.jpg', CV_LOAD_IMAGE_COLOR) # Convert image to
 image = cv2.imread('/path/to/image.jpg', CV_LOAD_IMAGE_GRAYSCALE) # Convert image to grascale
 ```
 
-### Image Write
+### 2.2 Image Write <a name="2.2"></a>
+
+[go to top](#top)
 
 Basic image write function.
 
@@ -116,7 +308,9 @@ cv2.imwrite('/path/to/image.png', frame, [CV_IMWRITE_PNG_COMPRESSION, 9]) # Set 
 
 ```
 
-### Supported image extensions
+### 2.3 Supported image extensions <a name="2.3"></a>
+
+[go to top](#top)
 
 The following is a list of supported file extensions for images for both `.imread()` and `.imwrite()`.
 
@@ -131,9 +325,13 @@ The following is a list of supported file extensions for images for both `.imrea
 
 Do note that some file extensions might look for codecs within the OS image. It might be necessary to install the necessary packages for full support (though JPEG and PNG are always supported).
 
-## Video I/O
+## 3 Video I/O <a name="3"></a>
 
-### Webcam / USB Connected Camera
+[go to top](#top)
+
+### 3.1 Webcam / USB Connected Camera <a name="3.1"></a>
+
+[go to top](#top)
 
 To get footage from a webcam or USB connected camera, it is necessary to first define the capture object (the convention is to call it `cap`). Then invoke the `.read()` subroutine on the capture object to yield 1 frame.
 
@@ -149,11 +347,15 @@ Firstly, the `VideoCapture` object is set to `0`. By default, the first webcam c
 
 `.read()` returns a return, `ret` as well as the frame, `frame`. `ret` and `frame` are merely common conventions.
 
-### IP Camera
+### 3.2 IP Camera <a name="3.2"></a>
+
+[go to top](#top)
 
 It is also possible to connect to an IP camera as OpenCV supports FFMPEG via HTTP or RTSP. Simply feed the relevant URL into the `VideoCapture` object. [ispyconnect](https://www.ispyconnect.com/) has a good list of camera URLs and their open source utility can be used to find the appropriate URL of the camera as well.
 
-#### Process
+#### 3.2.1 Process <a name="3.2.1"></a>
+
+[go to top](#top)
 
 1. Check that the IP address assigned to the camera is within the same range of the camera. For instance, if the camera is set to `192.168.0.11`, the computer IP address should be set to `192.168.0.xx`. This can be checked using `ipconfig` in the command prompt (windows) or `ifconfig` in the bash terminal (linux). 
 
@@ -180,7 +382,9 @@ ret, frame = cap.read()
 cap.release() 
 ```
 
-#### Troubleshooting Notes
+#### 3.2.2 Troubleshooting Notes <a name="3.2.2"></a>
+
+[go to top](#top)
 
 If the URL does not seem to work, do not worry - as long as the URL works on browser or in ispyconnect, the actual URL cannot be far off.
 
@@ -195,7 +399,9 @@ If the URL does not seem to work, do not worry - as long as the URL works on bro
 2. Check that the port is correct - sometimes the URL will require a port. Remove the port if there is one and try to find a port if there isn't one.
 3. Double check the URL - ensure that you are not using HTTPS or that the RTSP link does not start with a HTTP header by mistake.
 
-### Full Video Display Script
+### 3.3 Full Video Display Script <a name="3.3"></a>
+
+[go to top](#top)
 
 In most cases, we do not only want 1 frame but we seek to grab multiple frames from the camera. This section will show the full example script.
 
@@ -221,7 +427,9 @@ cv2.destroyAllWindows() # Destroy the viewing window
 cap.release() # Release the capture object
 ```
 
-### Video Writing
+### 3.4 Video Writing <a name="3.4"></a>
+
+[go to top](#top)
 
 To write video, first define the output object with the relevant codec:
 
@@ -251,9 +459,13 @@ Then close the output writer at the end of the program. If the output writer is 
 out.release()
 ```
 
-## Image Related Functions
+## 4 Image Related Functions <a name="4"></a>
 
-### Shape
+[go to top](#top)
+
+### 4.1 Shape <a name="4.1"></a>
+
+[go to top](#top)
 
 The shape attribute returns the rows, columns and channels of the image (in that order).
 
@@ -265,7 +477,9 @@ img_layers = image.shape[2]
 
 `.shape[0]` and `.shape[1]` are some of the most commonly used attributes. It is easy to confuse the two so do refer back when troubleshooting code.
 
-### Slicing Images
+### 4.2 Slicing Images <a name="4.2"></a>
+
+[go to top](#top)
 
 It is possible to slice images by working on them as numpy arrays. This would allow a specific section of the image to be cropped and saved as another image.
 
@@ -294,7 +508,9 @@ In this example, the image is split into 4 equally sized images. The way this is
 
 The script then proceeds to slice the image 4 times to form 4 cropped images which are then placed within a crop array to be returned by the function.
 
-## Keystrokes
+## 5 Keystrokes <a name="5"></a>
+
+[go to top](#top)
 
 OpenCV uses the `waitKey` function to draw new frames on to any OpenCV active windows. This means that the `waitKey` function has 2 secondary purposes
 
@@ -302,7 +518,9 @@ OpenCV uses the `waitKey` function to draw new frames on to any OpenCV active wi
 - Secondary Function 1: Allows developer to control the delay of the update loop
 - Secondary Function 2: Allows developer to check for specific keystrokes to do specific actions
 
-### Close Program
+### 5.1 Close Program <a name="5.1"></a>
+
+[go to top](#top)
 
 The most ubiquitous use of all is the use of the `waitKey` function to close a program.
 
@@ -324,7 +542,9 @@ cap.release()
 cv2.destroyAllWindows()
 ```
 
-### Adding Additional User Functionality with Keystrokes
+### 5.2 Adding Additional User Functionality with Keystrokes <a name="5.2"></a>
+
+[go to top](#top)
 
 Most people have taken to appending `if cv2.waitKey(1) & 0xFF == ord('q'):` automatically to the end of their loops. But I personally think that the next approach, while more verbose is superior. It is more extensible and builds a better habit than appending a line without thinking about what it actually means.
 
@@ -339,7 +559,9 @@ elif key == ord('c'):
 	cv2.imwrite('output.jpg', image)
 ```
 
-#### Working with Special Keys
+#### 5.2.1 Working with Special Keys <a name="5.2.1"></a>
+
+[go to top](#top)
 
 In the event that a special key is desired such as `Esc`, `spacebar` and etc. The dec code of the key can be used instead. Refer to the [ASCII table](http://www.asciitable.com/) for specific dec codes.
 
@@ -372,11 +594,15 @@ if key == ord('q'):
 	break
 ```
 
-## Working with Picamera
+## 6 Working with Picamera <a name="6"></a>
+
+[go to top](#top)
 
 The RPi Picamera is unique as it connects directly to the RPi using a ribbon cable. Due to this it requires use of the `picamera` library (to be installed separately) and does not use the `VideoCapture` object.
 
-### Imports
+### 6.1 Imports <a name="6.1"></a>
+
+[go to top](#top)
 
 `picamera` generally requires 2 imports in order to work.
 
@@ -385,7 +611,9 @@ from picamera.array import PiRGBArray
 from picamera import PiCamera
 ```
 
-### Initialization
+### 6.2 Initialization <a name="6.2"></a>
+
+[go to top](#top)
 
 Basic initialization of the Pi Camera is as follows:
 
@@ -401,7 +629,9 @@ rawCapture = PiRGBArray(camera, size=(resolution_width, resolution_height))
 
 Check that the resolution is correct. Most Pi Cameras support a few very specific resolutions and associated frame-rates. The `picamera` library will warn and default to the closest available resolution if the input resolution is invalid. However, this might break other parts of the code so do be aware of this.
 
-#### Additional Parameters
+#### 6.2.1 Additional Parameters <a name="6.2.1"></a>
+
+[go to top](#top)
 
 One of the more powerful aspects of using a Pi Camera is the ability to modify the camera settings on the software side instead of going into a camera menu built into the camera firmware. This allows the camera lighting and other related settings to be set to specifically be optimal for a set of lighting conditions, boosting performance in specific use cases.
 
@@ -418,7 +648,9 @@ camera.awb_gains = (Fraction(25, 16), Fraction(25,16)) # Set a specific white ba
 
 The full API (and associate list of options) can be found: [here](https://picamera.readthedocs.io/en/release-1.9/api.html). 
 
-##### Setting White Balance
+##### 6.2.1.1 Setting White Balance <a name="6.2.1.1"></a>
+
+[go to top](#top)
 
 With regards to `camera.awb_gains`, it is better to print out the `awb` value first by invoking the camera attribute:
 
@@ -436,7 +668,9 @@ camera.awb_mode = 'off' # Turn off auto white balance
 camera.awb_gains = (Fraction(25, 16), Fraction(25,16)) # Set a specific white balance gain
 ```
 
-### Reading Video from Pi Camera
+### 6.3 Reading Video from Pi Camera <a name="6.3"></a>
+
+[go to top](#top)
 
 Reading video from the Pi Camera involves reading from the camera `rawCapture` buffer. This means that the entire capture object method normally used is completely circumvented. The following is the code for reading frames after the Pi Camera has been initialized:
 
@@ -466,7 +700,9 @@ cv2.destroyAllWindows()
 camera.close()
 ```
 
-#### Video Formats
+#### 6.3.1 Video Formats <a name="6.3.1"></a>
+
+[go to top](#top)
 
 In addition to the `bgr` format, `picamera` also supports other formats.
 
@@ -482,7 +718,9 @@ In addition to the `bgr` format, `picamera` also supports other formats.
 
 However as we are working with OpenCV, `bgr` will likely be the format used.
 
-#### Flushing the Frame Buffer
+#### 6.3.2 Flushing the Frame Buffer <a name="6.3.2"></a>
+
+[go to top](#top)
 
 Occasionally in certain use cases, the output framer-ate would significantly stutter, dropping to as low as 2 FPS where one would expect 24 or 30 FPS. On possible solution is to simply flush the frame buffer. In most cases, there will be no noticeable hit to performance if the actual camera frame-rate is high (24 or higher) and the buffer is set low (5 or so frames).
 
@@ -497,18 +735,24 @@ for img in camera.capture_continuous(rawCapture, format="bgr", use_video_port=Tr
     rawCapture.truncate(0)
 ```
 
-### Scripts
+### 6.4 Scripts <a name="6.4"></a>
+
+[go to top](#top)
 
 The following are the scripts available in the sample code/template code folder:
 
 - `pi_camera_single_frame.py`: Grabs a single pi camera frame and displays it. Can be used to test if the pi camera even works
 - `pi_camera_video.py`: Grabs video output from the pi camera. Has various options for the camera as well as the option to flush the frame buffer. Also allows you to capture the active frame by pressing `c`.
 
-## Drawing Functions
+## 7 Drawing Functions <a name="7"></a>
+
+[go to top](#top)
 
 Drawing functions are basically the bread and butter of OpenCV. It allows you to highlight important information for client as well as do debugging. Detailed documentation of the drawing functions is available [here](https://docs.opencv.org/2.4/modules/core/doc/drawing_functions.html).
 
-### Rectangle
+### 7.1 Rectangle <a name="7.1"></a>
+
+[go to top](#top)
 
 Rectangle functions can be used to draw bounding boxes, region of interest, etc.
 
@@ -522,7 +766,9 @@ cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 1)
 
 This draws a rectangle from `x1`, `y1` coordinates to `x2`, `y2` coordinates. The tuple after defines the color of the rectangle in bgr format. The last number refers to the thickness.
 
-### Text
+### 7.2 Text <a name="7.2"></a>
+
+[go to top](#top)
 
 Text can be used to draw all sorts of useful information such as class names, confidence levels or even instructions to the user on how to use the utility.
 
@@ -537,7 +783,9 @@ cv2.putText(frame, "hi", (x, y), cv2.FONT_HERSHEY_PLAIN, fontScale=2.0, color=(2
 
 Pretty straightforward syntax-wise. It basically tries to put the text (in this case 'hi') on the frame at the coordinates `x` and `y` with the font `FONT_HERSHEY_PLAIN` with the scale of `2.0`, blue color and the line thickness of 2 pixels.
 
-#### Font Options
+#### 7.2.1 Font Options <a name="7.2.1"></a>
+
+[go to top](#top)
 
 There are other font options for OpenCV. Usually the font is declared at the top of the program like so:
 
@@ -562,7 +810,9 @@ Here is an image preview of what the fonts look like (image from [codeyarns](![F
 
 ![Fonts available in OpenCV](https://codeyarns.files.wordpress.com/2015/03/20150311_opencv_fonts.png?w=1100)
 
-#### Common Text Locations
+#### 7.2.2 Common Text Locations <a name="7.2.2"></a>
+
+[go to top](#top)
 
 It is common to put text in the edges of the image (such as FPS counters). Due to this, the coordinates of the text can be dynamically obtained using the `.shape` attribute. Examples below:
 
@@ -574,7 +824,9 @@ Take note that text is drawn with the top left of the text at the specified coor
 
 *Reminder: Origin of the image is in the top left corner of the image*
 
-### Line
+### 7.3 Line <a name="7.3"></a>
+
+[go to top](#top)
 
 Lines are another common entity used in image processing outputs. It can be used to visualize the ROI or even visualize velocities and trends of tracked objects.
 
@@ -588,7 +840,9 @@ cv2.line(frame, (x1, y1), (x2, y2), (255, 0, 0), 2)
 
 Similar to a rectangle except that it draws a straight line between the 2 points being referenced.
 
-### Circle
+### 7.4 Circle <a name="7.4"></a>
+
+[go to top](#top)
 
 Circles are primarily used to draw houghcircles or dots (by drawing a tiny circle). Dots can be used to mark the center of bounding boxes for tracking or other purposes.
 
@@ -600,11 +854,15 @@ cv2.circle(image, pt, radius, color, thickness)
 cv2.circle(frame, (x, y), 5, (255, 0, 0), 2)
 ```
 
-### Other Drawing Functions
+### 7.5 Other Drawing Functions <a name="7.5"></a>
+
+[go to top](#top)
 
 There are other drawing functions but as they are not as commonly used, they will not be discussed within the scope of this document. Full drawing documentation available [here](https://docs.opencv.org/2.4/modules/core/doc/drawing_functions.html).
 
-## Hough Lines Transform
+## 8 Hough Lines Transform <a name="8"></a>
+
+[go to top](#top)
 
 Hough lines is a line detection method that works as an additional layer after a canny edge filter. This allows straight edges in an image to be detected.
 
@@ -616,7 +874,9 @@ The following is a Hough Line Transform used to detect a grid and subsequently a
 
 ![1563894456180](assets/1563894456180.png)
 
-### Basic Hough Lines Transform Implementation
+### 8.1 Basic Hough Lines Transform Implementation <a name="8.1"></a>
+
+[go to top](#top)
 
 ```python
 import cv2
@@ -644,7 +904,9 @@ cv2.imshow("detected lines", img)
 
 Notice that the Hough Lines detector actually only gives the rho and theta of the lines. This means that it is possible to generate what type of line or even the equation of the lines from the given output. This information will be of use in the arrow detection implementation as outlined in the Miscellaneous section.
 
-## Hough Circles Transform
+## 9 Hough Circles Transform <a name="9"></a>
+
+[go to top](#top)
 
 Like Hough Lines Transform, Hough Circles Transform simply attempts to find circles in the environment. 
 
@@ -652,7 +914,9 @@ Hough Circles Transform can be quite unreliable and susceptible to noise. Additi
 
 See the circumcenter detection section under miscellaneous for a possible algorithm that might fit your use case.
 
-### Simple Demo
+### 9.1 Simple Demo<a name="9.1"></a>
+
+[go to top](#top)
 
 This demo is taken from the [OpenCV docs](https://docs.opencv.org/master/da/d53/tutorial_py_houghcircles.html).
 
@@ -678,13 +942,19 @@ The result is as seen below:
 
 ![houghcircles2.jpg](https://docs.opencv.org/master/houghcircles2.jpg)
 
-## Morphology Transforms
+## 10 Morphology Transforms <a name="10"></a>
+
+[go to top](#top)
 
 Morphology transforms are very useful in image processing to bring out certain features or reducing unwanted noise to create a stronger signal.
 
-### Preparing an Image for Morphology Transforms
+### 10.1 Preparing an Image for Morphology Transforms <a name="10.1"></a>
 
-#### Convert to Grayscale
+[go to top](#top)
+
+#### 10.1.1 Convert to Grayscale<a name="10.1.1"></a>
+
+[go to top](#top)
 
 Morphology transforms can only be be applied to grayscale images. One way to get a grayscale image is to simple convert to grayscale.
 
@@ -694,7 +964,9 @@ This can be done using the `.cvtColor()` function:
 gray_image = cv2.cvtColor(raw_img, cv2.COLOR_BGR2GRAY)
 ```
 
-#### Image Thresholding
+#### 10.1.2 Image Thresholding <a name="10.1.2"></a>
+
+[go to top](#top)
 
 The other more common way to get a gray image is to simply do some form of thresholding to clean up the signal in the first place. By doing so, the image becomes cleaner as noise is filtered and a grayscale image is obtained automatically.
 
@@ -706,7 +978,9 @@ ret, thresh_img = cv2.threshold(raw_img,10,255,cv2.THRESH_BINARY)
 
 `ret` is simply the return (`True` / `False`)  while `thresh_img` (or more commonly simply left as `th`) is the thresholded single-channel image.
 
-#### Kernel
+#### 10.1.3 Kernel <a name="10.1.3"></a>
+
+[go to top](#top)
 
 Morphology Transforms first require the selection of a kernel. There are various kernels available. In the case of the arrow, a large cross kernel was used and because of that, you can see that the middles of the arrow have been removed.
 
@@ -723,7 +997,9 @@ Documentation on Kernels [here](https://docs.opencv.org/3.4/d4/dbd/tutorial_filt
 
 **Warning: Do note that kernels have to be odd-number in size**
 
-#### Inverting an Image
+#### 10.1.4 Inverting an Image <a name="10.1.4"></a>
+
+[go to top](#top)
 
 Eroding an image is not the same as inverting an image and then dilating the image. Nor is dilating an image the same as inverting an image and then eroding the image. Due to this, it is prudent to try inverting an image to see if the desired features can be brought out better than the original image.
 
@@ -733,7 +1009,9 @@ Inverting an image is relatively simple - just do a bitwise not operation on its
 inverted_img = cv2.bitwise_not(raw_img, raw_img)
 ```
 
-### Erode and Dilate
+### 10.2 Erode and Dilate <a name="10.2"></a>
+
+[go to top](#top)
 
 The OpenCV functions `.erode()` and `.dilate()` are the simplest of the morphology transforms. These 2 morphological operators are especially useful when trying to create more features in otherwise simple shapes with little lighting changes.
 
@@ -766,7 +1044,9 @@ eroded_frame = cv2.erode(image, kernel)
 dilated_frame = cv2.dilate(image, kernel)
 ```
 
-### Black Hat and Top Hat Transforms
+### 10.3 Black Hat and Top Hat Transforms <a name="10.3"></a>
+
+[go to top](#top)
 
 Black Hat and Top Hat are more advanced morphological transforms. In a Black hat transform, the image is dilated and then eroded before being compared to the original image. In a top hat transform the image is eroded and then dilated before being compared to the original image. More detailed information can be found [here](https://docs.opencv.org/2.4/doc/tutorials/imgproc/opening_closing_hats/opening_closing_hats.html).
 
@@ -781,7 +1061,9 @@ tophat = cv2.morphologyEx(raw_img, cv2.MORPH_TOPHAT, kernel) # Top Hat transform
 blackhat = cv2.morphologyEx(raw_img, cv2.MORPH_BLACKHAT, kernel) # Black Hat transform
 ```
 
-### Demo Script
+### 10.4 Demo Script <a name="10.4"></a>
+
+[go to top](#top)
 
 It makes no sense to keep talking about the theory when a quick demonstration will allow you to understand how these tools can be used to emphasize features you might need. Thus the demo script should be a good start in trying to find out if any of these morphological transforms are useful for you.
 
@@ -791,11 +1073,15 @@ Feel free to find the demo script `morph_transform_demo.py`. The options availab
 - `INVERT`: Sets whether the image should be inverted
 - `THRESH`: Sets whether to obtain a grayscale image via thresholding or by color conversion to grayscale
 
-## Centroid Detection
+## 11 Centroid Detection <a name="11"></a>
+
+[go to top](#top)
 
 Centroid detection is a method to find the "center of mass" of a detected blob. This can be useful when trying to determine the center of a uniform object or used to track the position or velocity of an object that does not have a fixed form (relative to the camera or otherwise).
 
-### Contour Detection
+### 11.1 Contour Detection <a name="11.1"></a>
+
+[go to top](#top)
 
 Centroid detection starts with Contour detection:
 
@@ -805,7 +1091,9 @@ img2, contours, hierarchy = cv2.findContours(img,cv2.RETR_TREE,cv2.CHAIN_APPROX_
 
 The most important return of interest are the contours found in `contour`
 
-### Centroid Detection of the Contours
+### 11.2 Centroid Detection of the Contours <a name="11.2"></a>
+
+[go to top](#top)
 
 It is then possible to iterate through each contour and find the centroid. It is also possible to filter the contours such that only the largest contour is processed.
 
@@ -828,13 +1116,17 @@ for c in contours:
 
 In the example, a rectangle was used to enclosed the contour. However a circle could be used if the objects within the use case are spherical in nature.
 
-## Mouse Events
+## 12 Mouse Events <a name="12"></a>
+
+[go to top](#top)
 
 OpenCV allows for mouse events on an active OpenCV window to do a callback to a specific function. This can be used to allow users to set ROI, select pixels or just add additional functionality.
 
 *As a side note, it's possible to make an entire GUI in OpenCV using rectangles and putText as well as checking mouse click locations - but please don't.*
 
-### Bind Callback Function
+### 12.1 Bind Callback Function <a name="12.1"></a>
+
+[go to top](#top)
 
 To begin, the callback function has to be bound to a specific OpenCV named window. This can be done by defining the name of the named window before hand and setting the mouse callback.
 
@@ -851,23 +1143,31 @@ cv2.setMouseCallback('test', some_function)
 cv2.imshow('test', frame)
 ```
 
-### Mouse Event Detection
+### 12.2 Mouse Event Detection <a name="12.2"></a>
+
+[go to top](#top)
 
 Within the callback function itself, it takes an argument `event` which is the specific mouse event passed onto the function when the callback is invoked. the most basic events needed for most functionality is mouse left button down and mouse left button up.
 
 *Note: It is important to check that the mouse button has been raised or else the functionality enclosed within the mouse button down will take place forever.*
 
-### Scripts
+### 12.3 Scripts <a name="12.3"></a>
+
+[go to top](#top)
 
 The example scripts that use mouse events are the `video_crop.py` and `roi_selection_demo.py` scripts. Both of these use mouse events to allow the user to define a specific region of interest.
 
-## SIFT 
+## 13 SIFT  <a name="13"></a>
+
+[go to top](#top)
 
 Scale-Invariant Feature Transform (SIFT) is a template matching algorithm. The issue with their implementation is that template matching tend to be expensive and only work well in a specific set of circumstances. 
 
 SIFT utilizes feature recognition to match an object in the image to a template that it has as reference. 
 
-### SIFT in OpenCV 3
+### 13.1 SIFT in OpenCV 3 <a name="13.1"></a>
+
+[go to top](#top)
 
 One very common issue with example code on the net for SIFT is that they are often outdated for OpenCV 3. Another possibility is that the programmer might find the module nonexistent.
 
@@ -891,7 +1191,9 @@ detector = cv2.xfeatures2d.SIFT_create(1000)
 
 Hopefully if you already know how to use SIFT and SURF, this has resolved the number 1 issue you've had going into this section.
 
-### Using SIFT 
+### 13.2 Using SIFT  <a name="13.2"></a>
+
+[go to top](#top)
 
 ```python
 frame = cv2.imread('test.png', 0) # read the test image in gray
@@ -931,11 +1233,15 @@ So what was all that? Basically, 2 sift objects were created to find features in
 
 Of course the theory is more complex but the idea here is to show how it works and provide example code for you to get going.
 
-### When not to use SIFT
+### 13.3 When not to use SIFT <a name="13.3"></a>
+
+[go to top](#top)
 
 Template matching is a pretty powerful tool, but there is a reason why I have left it to one of the last few sections. This is because template matching should not be used as a crutch. It is slow, unreliable and generally gets affected by too much noisy in complex environments. Where possible, you should always aim to use more efficient or generic algorithms instead of template matching - it should be a last resort.
 
-## Camera Calibration
+## 14 Camera Calibration <a name="14"></a>
+
+[go to top](#top)
 
 At times, the use case will call for a fish-eye camera or even simply a lens that has an FOV beyond 80 degrees - causing a slightly distortion effect. While this should not affect the more robust or general algorithms, it can cause issues with tracking or detection models that are more sensitive to object size, shape and the like. Especially when it comes to extreme fish-eye lenses where the same object can appear to warp and stretch differently at different parts of the image.
 
@@ -943,7 +1249,9 @@ To circumvent this, it is possible to actually map each pixel in the image to an
 
 To obtain the this "map" or more correctly known as a camera calibration matrix, the camera has to be calibrated using a grid of black and white (checkerboard pattern). This is because the spacing and "groundtruth" of a checkerboard pattern can be easily created in OpenCV (to the point that there is a function to generate this groundtruth). By comparing the groundtruth and the actual checkerboard pattern detected in the image, the camera calibration matrix can be generated.
 
-### Checkerboard Calibration
+### 14.1 Checkerboard Calibration <a name="14.1"></a>
+
+[go to top](#top)
 
 The checkerboard calibration involves taking many images of the checkerboard at various locations within the frame. The images are then globbed and converted to grayscale before `.findChessboardCorners` is invoked to find the checkerboard corners.
 
@@ -953,7 +1261,9 @@ ret, corners = cv.findChessboardCorners(gray, (7,6), None)
 
 In this case `(7,9)` means that the checkerboard is 7x9 in size.
 
-### Getting the camera `mtx`
+### 14.2 Getting the camera `mtx` <a name="14.2"></a>
+
+[go to top](#top)
 
 The camera `mtx` is then obtained by using the corners from all detected checkerboards:
 
@@ -963,7 +1273,9 @@ ret, mtx, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, gray.sha
 
 `mtx` in this case refers to the camera calibration matrix.
 
-### Getting the Optimal Camera Matrix for Undistortion
+### 14.3 Getting the Optimal Camera Matrix for Undistortion <a name="14.3"></a>
+
+[go to top](#top)
 
 With the `mtx` and `dist` matrices, the optimal camera matrix can be generated and invoked by `.undistort` to yield the undistorted image.
 
@@ -972,7 +1284,9 @@ newcameramtx, roi = cv2.getOptimalNewCameraMatrix(mtx, dist, (width,height), 1, 
 undistort = cv2.undistort(frame, mtx, dist, None, newcameramtx)
 ```
 
-### Steps for Demo
+### 14.4 Steps for Demo <a name="14.4"></a>
+
+[go to top](#top)
 
 2 demo scripts are available for trying out the OpenCV undistort functionality.
 
@@ -981,7 +1295,9 @@ undistort = cv2.undistort(frame, mtx, dist, None, newcameramtx)
 3. Save these images within a folder and then run `checkerboard_calib.py`. The `ret, mtx, dist, rvecs, tvecs` will be printed in the console. These value will be important
 4. Enter the values into the `camera_undistort_demo.py` and run the script
 
-## Aruco Marker Detection
+## 15 Aruco Marker Detection <a name="15"></a>
+
+[go to top](#top)
 
 Aruco markers are little markers that look like QR codes. They are very robust and thus where possible, they can be used as the preferred method of object detection or even localization (it is possible to estimate pose from Aruco markers).
 
@@ -1005,9 +1321,13 @@ corners, ids, rejectedImgPoints = aruco.detectMarkers(gray, aruco_dict, paramete
 
 The `aruco_detector.py` script is available and implemented as a class to allow easy import and integration into other code. Run it as a standalone script with a local file named `test.jpg` to test the code.
 
-## Miscellaneous Tricks and Scripts
+## 16 Miscellaneous Tricks and Scripts <a name="misc"></a>
 
-### Limit Display FPS 
+[go to top](#top)
+
+### 16.1 Limit Display FPS <a name="misc.1"></a>
+
+[go to top](#top)
 
 This allows the display loop to be set at a specific desired FPS.
 
@@ -1019,7 +1339,9 @@ if cv2.waitKey(img_ms) & 0xFF == ord('q'):
     break
 ```
 
-### Video Cropping Utility
+### 16.2 Video Cropping Utility <a name="misc.2"></a>
+
+[go to top](#top)
 
 `video_cropper.py` is a script that allows the user to set an ROI and then output a cropped version of the input video.
 
@@ -1030,7 +1352,9 @@ Use the mouse to select the ROI:
 - Press `r` to reset the ROI
 - Press `c` to confirm the ROI an begin the crop process
 
-### ROI Selection Utility
+### 16.3 ROI Selection Utility <a name="misc.3"></a>
+
+[go to top](#top)
 
 Within the example code is the `roi_selection_demo.py` script. This script allows the user to select 4 points to form an ROI. In the demo, the points are only printed in the console as output after being 'saved'. But that segment of the code can be modified as necessary.
 
@@ -1043,7 +1367,9 @@ The key takeaways are that:
 
 An advanced version of this code was used as part of an ROI selection utility during my internship stint. 
 
-### Use Odd Shaped ROI
+### 16.4 Use Odd Shaped ROI <a name="misc.4"></a>
+
+[go to top](#top)
 
 This works in conjunction with the ROI selection utility in the previous section as the user is likely to have selected a weird ROI.
 
@@ -1081,7 +1407,9 @@ else:
     cv2.rectangle(frame, (x, y), ((x + w), (y + h)), (0,0,255),
 ```
 
-### Working with Model Bounding Boxes
+### 16.5 Working with Model Bounding Boxes <a name="misc.5"></a>
+
+[go to top](#top)
 
 When working if Neural Network models and the like, the output is usually a list of bounding boxes. Generally, the bounding boxes can be of 2 types of formats:
 
@@ -1094,7 +1422,9 @@ To allow swapping of models within the code, it would be good to take into accou
 
 Functions to draw bounding boxes for both types of conventions can be found in `draw_bounding_boxes.py`.
 
-### Circle center detection using Circumcenter
+### 16.6 Circle center detection using Circumcenter <a name="misc.6"></a>
+
+[go to top](#top)
 
 This is an alternative algorithm to Hough Circles Transform if you use case is as follows:
 
@@ -1108,7 +1438,9 @@ Then using the [circumcenter formula](https://www.vedantu.com/formula/circumcent
 
 The demo implementation can be found in the sample code as `circumcenter_demo.py`. It requires `sympy` to run. It also assumes that you have a grayscale image with a strong signal to detect with.
 
-### Arrow Detection with Hough Lines Transform
+### 16.7 Arrow Detection with Hough Lines Transform <a name="misc.7"></a>
+
+[go to top](#top)
 
 To determine the direction of an arrow, template matching or other methods could be used. However one approach could see the use of Hough Lines Transform.
 
@@ -1152,7 +1484,9 @@ By comparing the x coordinate of `rY` on the line and the tru x coordinate of th
 
 Unfortunately the arrow test script is an unedited full script of a drone flight test script. Feel free to reference it however - I will edit it in the future to isolate a demo snippet if I have the time.
 
-### Red Color Thresholding Using RGB
+### 16.8 Red Color Thresholding Using RGB <a name="misc.8"></a>
+
+[go to top](#top)
 
 This is a method of color filtering that does not use hue and saturation, instead opting to work directly on the image layers using numpy.
 
