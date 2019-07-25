@@ -101,7 +101,7 @@ Additionally, SMACH can be used with ROS Actions to allow for increased code mod
 
 Convert state-less systems into state-based ones (depends on whether that is what you are looking for).
 
-![Untitled Diagram](assets/Untitled Diagram(2).jpg)
+![Untitled Diagram(2)](assets/Untitled Diagram(2).jpg)
 
 ## 2 Simple State Machine Example <a name="2"></a>
 
@@ -154,7 +154,7 @@ with sm:
 In each line, we add a new state, define the state name and what state class we are using (in this case `ExampleState()`) and then we assign the outcome with a new state or in the case of the last state, an outcome of the state machine.
 Without going further, you should be able to tell what would happen if we were to execute this state machine. The following is a simple diagram:
 
-![Untitled Diagram(1)](./assets/Untitled Diagram(1).jpg)
+![Untitled Diagram(1)](assets/Untitled Diagram(1).jpg)
 
 ### 2.4 Full Example <a name="2.4"></a>
 
@@ -411,7 +411,7 @@ It is always recommended to map userdata even if the input/output keys match wit
 
 The following is a diagram of how remapping looks like in the context of our state machine (Dotted lines indicate remaps):
 
-![SM](assets/SM-1564061452245.jpg)
+![SM-1564061452245](assets/SM-1564061452245.jpg)
 
 Thus the states can be added with this new knowledge of remapping:
 
@@ -848,7 +848,7 @@ Run the example script `state_machine_simple_introspection.py`.  Then launch `sm
 
 SMACH allows for various child states to affect the final state of a sub state machine. That sounds like a mouthful I know. Here's a diagram that can illustrate what I mean:
 
-![Copy of remap_sm](./assets/Copy of remap_sm.jpg)
+![Copy of remap_sm](assets/Copy of remap_sm.jpg)
 
 The yellow diamond is the outcome map - in essence it's an "AND" gate.
 
