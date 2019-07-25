@@ -1,0 +1,28 @@
+<package>
+  <name>smach_tutorials</name>
+  <version>0.1.0</version>
+  <description>
+    This package containes numerous examples of how to use SMACH. See the examples directory. It is modified from the rhaschke repo.
+  </description>
+  <author>Fasermaler</author>
+  <maintainer email="fasermaler@protonmail.com">fasermaler</maintainer>
+  <license>BSD</license>
+
+  <url>https://github.com/Fasermaler</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>rospy</run_depend>
+  <run_depend>smach</run_depend>
+  <run_depend>smach_ros</run_depend>
+
+  <run_depend>turtlesim</run_depend>
+  <!-- <run_depend>turtle_actionlib</run_depend> -->
+
+  <run_depend>actionlib</run_depend>
+  <run_depend>actionlib_msgs</run_depend>
+
+  <export>
+  </export>
+
+</package>
