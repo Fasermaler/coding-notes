@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>rqt_smach</name>
+  <version>0.0.0</version>
+  <description>
+    This is a smple rqt-based GUI for smach. It shows the state of
+    hierarchical SMACH state machines. It can visualize the possible
+    transitions between states, as well as the currently active state
+    and the values of user data that is passed around between states.
+    The smach viewer uses the SMACH debugging interface based on
+    the <a href="http://www.ros.org/wiki/smach_msgs">smach
+    messages</a> to gather information from running state machines.
+  </description>
+
+  <maintainer email="jbo@jhu.edu">Jonathan Bohren</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>rostest</buildtool_depend>
+
+  <exec_depend>xdot</exec_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>rqt_gui</exec_depend>
+  <exec_depend>rqt_gui_py</exec_depend>
+  <exec_depend>rqt_dot</exec_depend>
+  <exec_depend>smach_msgs</exec_depend>
+  <exec_depend>smach_ros</exec_depend>
+
+  <export>
+    <rqt_gui plugin="${prefix}/plugin.xml"/>
+  </export>
+</package>

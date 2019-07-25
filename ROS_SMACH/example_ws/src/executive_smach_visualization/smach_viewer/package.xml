@@ -1,0 +1,33 @@
+<package format="2">
+  <name>smach_viewer</name>
+  <version>2.0.0</version>
+  <description>
+    The smach viewer is a GUI that shows the state of hierarchical
+    SMACH state machines. It can visualize the possible transitions
+    between states, as well as the currently active state and the
+    values of user data that is passed around between states. The
+    smach viewer uses the SMACH debugging interface based on
+    the <a href="http://www.ros.org/wiki/smach_msgs">smach
+    messages</a> to gather information from running state machines.
+  </description>
+  <maintainer email="jbo@jhu.edu">Jonathan Bohren</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/smach_viewer</url>
+  <!-- <url type="bugtracker"></url> -->
+
+  <author email="jbo@jhu.edu">Jonathan Bohren</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>rostest</build_depend>
+
+  <exec_depend>smach_ros</exec_depend>
+  <exec_depend>xdot</exec_depend>
+  <exec_depend>smach_msgs</exec_depend>
+
+  <export>
+
+  </export>
+</package>
