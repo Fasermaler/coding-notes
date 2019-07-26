@@ -65,6 +65,7 @@ ______
       10.2	[Constructing the State Machine](#10.2)</br>
       10.3	[Creating the Iteration Container](#10.3)</br>
       10.4	[Running the Example](#10.4)</br>
+11. [Recovery Behavior](#11)</br>
 
 
 ## 1 Introduction <a name="1"></a>
@@ -1044,3 +1045,9 @@ with tutorial_it:
 [go to top](#top)
 
 The example code can be found as `iterator_tutorial.py`. It is recommended that SMACH viewer be used to see how the state machine actually functions.
+
+## 11 Recovery Behavior <a name="11"></a>
+
+The use of state machines means that it is possible to add recovery behaviors for a robot or a system. Here is a flow of how it could work:![recovery](assets/recovery.jpg)
+
+The example script can be found in `recovery.py`.

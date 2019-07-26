@@ -89,7 +89,7 @@ Additional resources to learn these things and more can be found in [Additional 
   - This person basically lives, breathes and eats reinforcement learning
 - [TheAlgorithms](https://github.com/TheAlgorithms/)
   - Lots of implementations for many many different types of algorithms in all languages
-  - A good reference
+  - A good referenceer
 - [AtsushiSakai's Python Robotics](https://github.com/AtsushiSakai/PythonRobotics)
   - Huge repository of Python implementations of well known robotics algorithms
   - Includes visualizations as well
