@@ -35,6 +35,14 @@ Additional resources to learn these things and more can be found in [Additional 
   - Aruco
   - and a whole bunch of tips and tricks
   - Plenty of [example code](https://github.com/Fasermaler/coding-notes/tree/master/OpenCV-Python/sample_code) as well! 
+- [ROS SMACH](https://github.com/Fasermaler/coding-notes/blob/master/ROS_SMACH/SMACH_Reference.md)
+  - Data Transfers
+  - Action Servers
+  - Visualization
+  - Concurrency
+  - Visualizations
+  - Recovery behavior
+  - Includes [example workspace](https://github.com/Fasermaler/coding-notes/tree/master/ROS_SMACH/example_ws) with working visualization!
 - [Pwntools](https://github.com/Fasermaler/coding-notes/blob/master/Pwntools/pwntools.md)
   - Tubes
   - GDB
@@ -89,7 +97,7 @@ Additional resources to learn these things and more can be found in [Additional 
   - This person basically lives, breathes and eats reinforcement learning
 - [TheAlgorithms](https://github.com/TheAlgorithms/)
   - Lots of implementations for many many different types of algorithms in all languages
-  - A good referenceer
+  - A good reference
 - [AtsushiSakai's Python Robotics](https://github.com/AtsushiSakai/PythonRobotics)
   - Huge repository of Python implementations of well known robotics algorithms
   - Includes visualizations as well
