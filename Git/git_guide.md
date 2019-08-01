@@ -95,7 +95,7 @@ In GitKraken, managing repositories is simple:
 
 1. Click on the folder icon in the top left hand corner
 
-   ![1564674025862](../../../Consistently%20Updated/coding-notes/Git/assets/1564674025862.png)
+   ![1564674025862](assets/1564674025862.png)
 
 2. In the *repository management* window, you can 
    - Open any local repository
@@ -170,7 +170,7 @@ More guidelines on how to write commit messages will be provided later.
 
 In GitKraken, active changes are tracked at the top of the repository tree and labeled as `// WIP`:
 
-![1564674656877](assets/1564674656877.png)
+![1564674656877](assets/multi_file.png)
 
 Files are color coded for convenience:
 
@@ -497,17 +497,17 @@ Commit messages deserves a subsection of it's own because they are the first thi
 
 Here is an example of a few git commit messages. What do you notice?
 
-![1564670491164](../../../Consistently%20Updated/coding-notes/Git/assets/1564670491164.png)
+![1564670491164](assets/1564670491164.png)
 
 Everything is straight forward to understand and each commit's purpose is made clear.
 
 Now here's another set of commit messages:
 
-![1564670575453](../../../Consistently%20Updated/coding-notes/Git/assets/1564670575453.png)
+![1564670575453](assets/1564670575453.png)
 
 What does "edit" even mean? What has been changed? Anyone interested would have to open up the source files to check what features may or may not have been added.
 
-![1564670713444](../../../Consistently%20Updated/coding-notes/Git/assets/1564670713444.png)
+![1564670713444](assets/1564670713444.png)
 
 Now this one is so long that even GitKraken could not fully show it.
 
@@ -614,7 +614,11 @@ It is still possible make the commit with the `-2` characters but you will not w
 
 ## Advanced Concepts
 
+The following are advanced concepts for those who are already comfortable with using Git. 
+
 ### Rebase
+
+
 
 ### Submodules
 
