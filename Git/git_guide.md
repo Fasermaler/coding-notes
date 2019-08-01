@@ -618,9 +618,126 @@ The following are advanced concepts for those who are already comfortable with u
 
 ### Rebase
 
+Rebase is a Git function that effectively rewrites history. It is the process of moving or combining a sequence of commits to a different base commit such that the base of a branch appears to have come from a different commit. However, the important thing to note is that a rebased branch, while looking the same, is comprised of an entirely new set of commits (which is evident from the commit ids). 
 
+Here is a visualization of rebase:
+
+![Git tutorial: Git rebase](assets/02.svg)
+
+#### Rebase Uses
+
+Rebase is often used to maintain a linear (and by extension, clean) commit history. For instance, if a feature branch has been created off an older commit on the *develop* branch and now the *develop* branch has a new update or bug fix that should be incorporated into the feature branch. In this case, a rebase allows the feature branch to effectively be shifted down the *develop* commit history.
+
+Rebasing should be used for integrating upstream changes into a local repository. It should not be used for public repository history as it would replace old commits with new ones and destroy a part of the project history. See the below section: Golden Rule of Rebasing for more details.
+
+#### Golden Rule of Rebasing
+
+Never do a git rebase on public branches.
+
+![Rebasing the master branch](assets/05.svg)
+
+What happens is that a rebase moves the commits in master to the tip of your feature. Unfortunately, everyone else is still in the original master branch. As rebasing is based on creating new commits, your local master will be seen as divergent from everyone else's. The only way to resolve this is to re-merge the two master branches - but by then you have wasted lots of time and made people pretty displeased.
+
+#### Merge vs Rebase
+
+A common debate on Git usage arises from the difference between a merge and a rebase. These are two different approaches towards Git Pulling from the master repository. 
+
+By default, `git pull` will cause a git merge between the local and master branches. 
+
+![Merging master into the feature branch](assets/02-1564677150817.svg)
+
+This allows the individual branches to be preserved but it does mean that the commit history will be non-linear as every time a major upstream change has to be incorporated. This gets worse if the master commit history is active as the repository history will become a mess.
+
+By contrast, `git pull --rebase` will pull the changes but rebase the entire feature branch on the latest master commit.
+
+![Rebasing the feature branch onto master](assets/03.svg)
+
+This results in a linear commit history and eliminates unnecessary merge commits. The downside is that there is a loss in feature history as well as the fact that rebase should not be used if it were to be in violation of the golden rule.
+
+#### Command Line
+
+Ensure that you have checked out into the desired branch for rebasing, then run:
+
+```shell
+$ git rebase <commit-reference>
+```
+
+Commit reference can be the commit ID, branch name (in this case the branch HEAD will be used) or a tag.
+
+#### GitKraken
+
+To rebase in GitKraken, ensure that you are in the desired branch. Then right click any commit in the repository tree and select to rebase into that specific commit.
+
+Using the dropdown menu under the *Pull* button, it is also possible to select the git pull rebase option in GitKraken as well.
+
+To read more about rebasing, check out the follow atlassian resources:
+
+- [Git Rebase](https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase)
+- [Merging vs Rebasing](https://www.atlassian.com/git/tutorials/merging-vs-rebasing)
 
 ### Submodules
+
+Submodules are simply other Git repositories that are imported into a repository as dependencies. This has the benefit of gaining pulling an updated version of a submodule. 
+
+Submodules can be used to break a project into smaller parts. In most cases however, the choice to use submodules has been made up especially if the repository is cloned from a public source (they are pretty commonly used especially with the newfangled AI and deep learning stuff).
+
+#### Command Line
+
+##### Add Submodule
+
+This will add a remote repository to the project. The default directory will be named the same as the repository. 
+
+```shell
+$ git submodule add <url>
+```
+
+There will now be a `.gitmodules` file that stores the submodule information.
+
+```shell
+[submodule "testsubmodule"]
+	path = testsubmodule
+	url = <url>
+```
+
+##### Get Submodule
+
+In the event that newly cloned repository has no submodules initialized, the following commands should be run:
+
+```shell
+$ git submodule init
+
+$ git submodule update
+```
+
+Alternatively, when cloning the main repository, add the `--recurse-submodules` flag. 
+
+##### Update Submodule
+
+Updating a submodule is pretty similar to working with a git repository except that it is necessary to navigate to the submodule directory first. Once there, call a git fetch and git merge:
+
+```shell
+$ git fetch 
+
+$ git merge origin/master
+```
+
+For more information on using submodules via CLI, see the Git Documentation on [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+
+#### GitKraken
+
+In GitKraken, upon cloning a repository, you will be prompted if you would like to download submodules. Any skipped submodules can be initialized afterwards in the left side panel under the *submodules* tab.
+
+##### Adding Submodules
+
+To add submodules, simply select the green plus sign on the submodules tab:
+
+![img](assets/add-submodule.png)
+
+##### Update Submodules
+
+Right click a submodule and select update:
+
+![img](assets/update-submodule.png)
 
 ### Upstream
 
