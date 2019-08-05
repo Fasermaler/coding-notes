@@ -18,7 +18,7 @@ Rebase is a Git function that effectively rewrites history. It is the process of
 
 Here is a visualization of rebase:
 
-![Git tutorial: Git rebase](../../../Consistently%20Updated/coding-notes/Git/assets/02.svg)
+![Git tutorial: Git rebase](assets/02.svg)
 
 #### Rebase Uses
 
@@ -30,7 +30,7 @@ Rebasing should be used for integrating upstream changes into a local repository
 
 Never do a git rebase on public branches.
 
-![Rebasing the master branch](../../../Consistently%20Updated/coding-notes/Git/assets/05.svg)
+![Rebasing the master branch](assets/05.svg)
 
 What happens is that a rebase moves the commits in master to the tip of your feature. Unfortunately, everyone else is still in the original master branch. As rebasing is based on creating new commits, your local master will be seen as divergent from everyone else's. The only way to resolve this is to re-merge the two master branches - but by then you have wasted lots of time and made people pretty displeased.
 
@@ -40,13 +40,13 @@ A common debate on Git usage arises from the difference between a merge and a re
 
 By default, `git pull` will cause a git merge between the local and master branches. 
 
-![Merging master into the feature branch](../../../Consistently%20Updated/coding-notes/Git/assets/02-1564677150817.svg)
+![Merging master into the feature branch](assets/02-1564677150817.svg)
 
 This allows the individual branches to be preserved but it does mean that the commit history will be non-linear as every time a major upstream change has to be incorporated. This gets worse if the master commit history is active as the repository history will become a mess.
 
 By contrast, `git pull --rebase` will pull the changes but rebase the entire feature branch on the latest master commit.
 
-![Rebasing the feature branch onto master](../../../Consistently%20Updated/coding-notes/Git/assets/03.svg)
+![Rebasing the feature branch onto master](assets/03.svg)
 
 This results in a linear commit history and eliminates unnecessary merge commits. The downside is that there is a loss in feature history as well as the fact that rebase should not be used if it were to be in violation of the golden rule.
 
@@ -127,13 +127,13 @@ In GitKraken, upon cloning a repository, you will be prompted if you would like 
 
 To add submodules, simply select the green plus sign on the submodules tab:
 
-![img](../../../Consistently%20Updated/coding-notes/Git/assets/add-submodule.png)
+![img](assets/add-submodule.png)
 
 ##### Update Submodules
 
 Right click a submodule and select update:
 
-![img](../../../Consistently%20Updated/coding-notes/Git/assets/update-submodule.png)
+![img](assets/update-submodule.png)
 
 ### Upstream
 
