@@ -6,7 +6,8 @@ This guide will cover the basics of the Git workflow and how to use Github - a c
 
 ## Pre-requisites
 
-- Basic bash knowledge
+- Knowledge on how to use an Internet Browser
+- [GitHub Account](https://github.com/)
 - Interest in learning how to *git gud*
 
 ## Introduction
