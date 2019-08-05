@@ -203,13 +203,13 @@ On top of each developer simply pushing and pulling from the *origin*, developer
 
 You can think of the repository on GitHub as the *origin* repository. If you had downloaded AKA *cloned* the repository into your local computer, that will be the local version of your repository. You will then be pushing changes to the *origin* repository on GitHub and fetching changes as needed.
 
-![img](../../../Consistently%20Updated/coding-notes/Git/assets/centr-decentr@2x.png)
+![img](assets/centr-decentr@2x.png)
 
 ### Main Branches
 
 Vincent proposed two main branches - *master* and *develop* within the *origin* repository. If this sounds confusing to you, this is the hierarchy as visualized in GitKraken:
 
-![1564656014639](../../../Consistently%20Updated/coding-notes/Git/assets/1564656014639.png)
+![1564656014639](assets/1564656014639.png)
 
 #### Master Branch
 
@@ -261,7 +261,7 @@ When creating a feature branch, disable *fast-forward* so as to not lose any his
 
 The following allows you to visualize the loss in historical information:
 
-![img](../../../Consistently%20Updated/coding-notes/Git/assets/merge-without-ff@2x.png)
+![img](assets/merge-without-ff@2x.png)
 
 #### Release Branches
 
@@ -283,7 +283,7 @@ Only upon creation of a release branch does a version number get assigned to the
 
 Here's an example of release branches for Arducopter - open-source drone firmware:
 
-![1564661426621](../../../Consistently%20Updated/coding-notes/Git/assets/1564661426621.png)
+![1564661426621](assets/1564661426621.png)
 
 After a *release* branch is completed, it is merged with the *master* branch and tagged with the appropriate version number for easy reference.
 
@@ -317,17 +317,17 @@ Commit messages deserves a subsection of it's own because they are the first thi
 
 Here is an example of a few git commit messages. What do you notice?
 
-![1564670491164](../../../Consistently%20Updated/coding-notes/Git/assets/1564670491164.png)
+![1564670491164](assets/1564670491164.png)
 
 Everything is straight forward to understand and each commit's purpose is made clear.
 
 Now here's another set of commit messages:
 
-![1564670575453](../../../Consistently%20Updated/coding-notes/Git/assets/1564670575453.png)
+![1564670575453](assets/1564670575453.png)
 
 What does "edit" even mean? What has been changed? Anyone interested would have to open up the source files to check what features may or may not have been added.
 
-![1564670713444](../../../Consistently%20Updated/coding-notes/Git/assets/1564670713444.png)
+![1564670713444](assets/1564670713444.png)
 
 Now this one is so long that even GitKraken could not fully show it.
 
@@ -349,7 +349,7 @@ As a rule of thumb, separate the subject of the commit with the body of the comm
 
 In GitKraken, the subject and body is divided into *Summary* and *Description* sections. A commit with both sections filled will look like this in the repository history on GitHub
 
-![1564671383062](../../../Consistently%20Updated/coding-notes/Git/assets/1564671383062.png)
+![1564671383062](assets/1564671383062.png)
 
 The bolded text above it the *Summary* while the words in smaller font below form the *Description*.
 
@@ -357,7 +357,7 @@ The bolded text above it the *Summary* while the words in smaller font below for
 
 Keeping the subject line at 50 characters makes the commit history more readable and also forces the author to think about brevity. If the commit is on GitHub, GitHub itself will warn if a commit message gets too long:
 
-![1564671619233](../../../Consistently%20Updated/coding-notes/Git/assets/1564671619233.png)
+![1564671619233](assets/1564671619233.png)
 
 #### 3. Capitalize the subject line <a name="rule3"></a> 
 
@@ -424,10 +424,20 @@ This is used to saved time for everyone (including yourself in the future)
 
 One great thing about using GitKraken is that it actively polices the 72 character limit:
 
-![1564670879735](../../../Consistently%20Updated/coding-notes/Git/assets/1564670879735.png)
+![1564670879735](assets/1564670879735.png)
 
 While it is possible to go over the limit, GitKraken will make it clear that the commit message is now not within optimal conventions. 
 
-![1564670936504](../../../Consistently%20Updated/coding-notes/Git/assets/1564670936504.png)
+![1564670936504](assets/1564670936504.png)
 
 It is still possible make the commit with the `-2` characters but you will not wallow in shame for disappointing the Git Gods.
+
+## Conclusion
+
+That's about it! You now know:
+
+- How to use basic GitHub functionalities
+- How the Git workflow is used to ensure that clean work processes are acheived
+- How to write a good commit message
+
+In the next sub guide we will cover how to use GitKraken - a GUI based utility for using Git. We will also cover the underlying Git commands!
