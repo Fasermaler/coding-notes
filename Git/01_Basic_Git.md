@@ -10,7 +10,25 @@ This guide will cover the basics of the Git workflow and how to use Github - a c
 - [GitHub Account](https://github.com/)
 - Interest in learning how to *git gud*
 
-## Introduction
+## Table Of Contents <a name="top"></a>
+
+1. [Conclusion](#1)    
+2. [Introduction](#2)    
+3. [Commit Messages](#3)    
+   3.1 [Some Examples](#3.1)    
+   3.2 [The Seven Rules of a Great Commit Message](#3.2)    
+   3.3 [Commit Messages in GitKraken](#3.3)    
+4. [GitHub](#4)    
+   4.1 [Hello World](#4.1)    
+5. [Git WorkFlow](#5)    
+   5.1 [Decentralized Version Control](#5.1)    
+   5.2 [Main Branches](#5.2)    
+   5.3 [Supporting Branches](#5.3)    
+
+
+
+
+## 2. Introduction <a name="2"></a>
 
 Git is a version control framework that is widely used. You might have heard of GitHub - a thriving open source community where people share code and work together to improve each other's work. GitHub uses Git, **but Git does not actually require GitHub**. 
 
@@ -22,11 +40,13 @@ One more thing to note: As you go through this guide, feel free to create a test
 
 In this first part of the guide, we will use GitHub as it requires no command line, no special tools or what-so-ever to get started. In later guides, we will cover GitKraken and the Git Command Line.
 
-## GitHub
+## 4. GitHub <a name="4"></a>
 
 GitHub is a code hosting platform that allows users to collaboratively work on large open-source projects as well as do version control on their projects. It is based on Git but does not require Git command line knowledge to use. 
 
-### Hello World
+### 4.1 Hello World <a name="4.1"></a>
+[go to top](#top)
+
 
 The following section is based heavily on the GitHub Introductory [Guide](https://guides.github.com/activities/hello-world/#intro).
 
@@ -184,7 +204,7 @@ Not so bad wasn't it? Within this short span of time, you have:
 
 Take a look at your GitHub profile and you’ll see your new [contribution squares](https://help.github.com/articles/viewing-contributions)!
 
-## Git WorkFlow
+## 5. Git WorkFlow <a name="5"></a>
 
 With some basics under your belt, it's time to understand the *Git Workflow*.
 
@@ -196,7 +216,9 @@ Below is what Vincent envisioned when he first drafted up the workflow:
 
 In the previous image, the entire picture depicts a repository. The individual vertical lines (excluding the timeline) are individual *branches* of the repository.
 
-### Decentralized Version Control
+### 5.1 Decentralized Version Control <a name="5.1"></a>
+[go to top](#top)
+
 
 Leveraging on the decentralized nature of Git allows developers more flexibility in dealing with their workflow. However, in Vincent's workflow, Vincent proposed that the *origin* repository as the *ground truth* (AKA production repository). 
 
@@ -206,7 +228,9 @@ You can think of the repository on GitHub as the *origin* repository. If you had
 
 ![img](assets/centr-decentr@2x.png)
 
-### Main Branches
+### 5.2 Main Branches <a name="5.2"></a>
+[go to top](#top)
+
 
 Vincent proposed two main branches - *master* and *develop* within the *origin* repository. If this sounds confusing to you, this is the hierarchy as visualized in GitKraken:
 
@@ -230,7 +254,9 @@ If it's hard to wrap your head around it, an analogy would be a beta branch of a
 | Who merges?             | Repository Maintainer | Everyone / team leads         |
 | Broken Code acceptable? | Hell no               | No                            |
 
-### Supporting Branches
+### 5.3 Supporting Branches <a name="5.3"></a>
+[go to top](#top)
+
 
 Supporting branches are other smaller branches that make it easier to manage the code before they make it back into the main branches. In smaller projects, they are often unnecessary. Nonetheless it's good to know these branches as they will become useful in larger projects. 
 
@@ -310,11 +336,13 @@ When completed, the *hotfix* branch is to be merged into the *master* and *devel
 
 **However, if there is a *release* branch active, the *hotfix* branch is to be merged into the *release* branch instead of *develop* branch. The changes will be propagated to *develop* once the *release* branch is complete.**
 
-## Commit Messages
+## 3. Commit Messages <a name="3"></a>
 
 Commit messages deserves a subsection of it's own because they are the first thing people (or even yourself) will read when trying to understand the commit. Writing good commit messages is also essential in trying to get your pull request approved as a poor commit message will leave the repository maintainer confused as to intent and purpose of the pull request.
 
-### Some Examples
+### 3.1 Some Examples <a name="3.1"></a>
+[go to top](#top)
+
 
 Here is an example of a few git commit messages. What do you notice?
 
@@ -332,7 +360,9 @@ What does "edit" even mean? What has been changed? Anyone interested would have 
 
 Now this one is so long that even GitKraken could not fully show it.
 
-### The Seven Rules of a Great Commit Message
+### 3.2 The Seven Rules of a Great Commit Message <a name="3.2"></a>
+[go to top](#top)
+
 
 The following have been taken from [Chris Beam's website](https://chris.beams.io/posts/git-commit/), though as he admits - this has all been said before time an again:
 
@@ -421,7 +451,9 @@ Commit messages should answer the question of what has been changed and why it h
 
 This is used to saved time for everyone (including yourself in the future)
 
-### Commit Messages in GitKraken
+### 3.3 Commit Messages in GitKraken <a name="3.3"></a>
+[go to top](#top)
+
 
 One great thing about using GitKraken is that it actively polices the 72 character limit:
 
@@ -433,7 +465,7 @@ While it is possible to go over the limit, GitKraken will make it clear that the
 
 It is still possible make the commit with the `-2` characters but you will not wallow in shame for disappointing the Git Gods.
 
-## Conclusion
+## 1. Conclusion <a name="1"></a>
 
 That's about it! You now know:
 
