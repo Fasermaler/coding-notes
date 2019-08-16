@@ -823,6 +823,8 @@ The repository of examples prepared already has the necessary dependencies for `
 2. `catkin_make` the workspace and source the `devel.bash` file.
 3. Attempt to run smach viewer using `rosrun rqt_smach rqt_smach`
 
+Note: To support windows, the folders within `example_ws/src` were renamed from `executive_smach_visualization` to just `visualization`. Please rename them back if you encounter any issues. There should be 2 folders that need to be renamed.
+
 ### 7.3 Running SMACH Viewer <a name="7.3"></a>
 
 [go to top](#top)
